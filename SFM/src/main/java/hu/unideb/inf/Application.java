@@ -19,19 +19,12 @@ public class Application {
             a.setMennyiseg(200);
             a.setVercsoport("+A");
             aDAO.saveVerado(a);
-            Verado b=new Verado();
-            b.setNev("Joska Pista");
-            b.setMennyiseg(140);
-            b.setVercsoport("-B");
-            aDAO.saveVerado(b);
 
 
                 Korhaz korhaz = new Korhaz();
                 korhaz.setNev("KisPistaNagyKorhaza");
                 korhaz.setIdo("8:25");
                 korhaz.getVeradok().add(a);
-                korhaz.getVeradok().add(b);
-
                 aDAO.saveKorhaz(korhaz);
 
 
