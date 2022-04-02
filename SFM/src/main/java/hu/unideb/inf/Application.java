@@ -1,0 +1,49 @@
+package hu.unideb.inf;
+
+import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import hu.unideb.inf.model.*;
+import org.h2.tools.Server;
+
+public class Application {
+
+    public static void main(String[] args) throws SQLException {
+        startDatabase();
+
+        try(VeradoDAO aDAO = new JpaVeradoDAO();){
+            Verado a=new Verado();
+            a.setNev("Minta Bela");
+            a.setMennyiseg(200);
+            a.setVercsoport("+A");
+            aDAO.saveVerado(a);
+            Verado b=new Verado();
+            b.setNev("Joska Pista");
+            b.setMennyiseg(140);
+            b.setVercsoport("-B");
+            aDAO.saveVerado(b);
+
+
+                Korhaz korhaz = new Korhaz();
+                korhaz.setNev("KisPistaNagyKorhaza");
+                korhaz.setIdo("8:25");
+                korhaz.getVeradok().add(a);
+                korhaz.getVeradok().add(b);
+
+                aDAO.saveKorhaz(korhaz);
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+    private static void startDatabase() throws SQLException {
+        new Server().runTool("-tcp", "-web", "-ifNotExists");
+    }
+}
