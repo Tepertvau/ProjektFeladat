@@ -9,7 +9,7 @@ import hu.unideb.inf.model.*;
 import org.h2.tools.Server;
 
 public class Application {
-
+// picsafasz és alma
     public static void main(String[] args) throws SQLException {
         startDatabase();
 
@@ -22,7 +22,7 @@ public class Application {
 
 
                 Korhaz korhaz = new Korhaz();
-                korhaz.setNev("KisPistaNagyKorhaza");
+                korhaz.setNev("KisPistNagyKorhaza");
                 korhaz.setIdo("8:25");
                 korhaz.getVeradok().add(a);
                 aDAO.saveKorhaz(korhaz);
