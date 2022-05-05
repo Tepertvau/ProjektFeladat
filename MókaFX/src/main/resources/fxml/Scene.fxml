@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="608.0" prefWidth="907.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Véradás">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+          <Tab text="Véradó pont">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="436.0" layoutY="68.0" prefHeight="362.0" prefWidth="386.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Azonosító" />
+                            <TableColumn prefWidth="80.79998779296875" text="Kórház neve" />
+                              <TableColumn prefWidth="76.79998779296875" text="Nyitvatartás" />
+                              <TableColumn prefWidth="75.199951171875" text="Juttatás" />
+                              <TableColumn prefWidth="78.39990234375" text="Helyszín" />
+                          </columns>
+                        </TableView>
+                        <Pane layoutX="86.0" layoutY="90.0" prefHeight="339.0" prefWidth="200.0">
+                           <children>
+                              <CheckBox layoutX="64.0" layoutY="6.0" mnemonicParsing="false" text="Debrecen" />
+                              <CheckBox layoutX="64.0" layoutY="29.0" mnemonicParsing="false" text="Budapest" />
+                              <CheckBox layoutX="64.0" layoutY="53.0" mnemonicParsing="false" text="Miskolc" />
+                              <CheckBox layoutX="64.0" layoutY="77.0" mnemonicParsing="false" text="Győr" />
+                              <CheckBox layoutX="64.0" layoutY="101.0" mnemonicParsing="false" text="Nyíregyháza" />
+                              <CheckBox layoutX="63.0" layoutY="125.0" mnemonicParsing="false" text="Pécs" />
+                              <CheckBox layoutX="64.0" layoutY="153.0" mnemonicParsing="false" text="Szolnok" />
+                              <CheckBox layoutX="64.0" layoutY="179.0" mnemonicParsing="false" text="Szeged" />
+                              <CheckBox layoutX="64.0" layoutY="208.0" mnemonicParsing="false" text="Újfehértó" />
+                              <CheckBox layoutX="64.0" layoutY="238.0" mnemonicParsing="false" text="Kiskunhalas" />
+                              <CheckBox layoutX="64.0" layoutY="271.0" mnemonicParsing="false" text="Siófok" />
+                              <CheckBox layoutX="64.0" layoutY="299.0" mnemonicParsing="false" text="Záhony" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="86.0" layoutY="68.0" prefHeight="26.0" prefWidth="200.0">
+                           <children>
+                              <Text layoutX="70.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Egyszerűbb" />
+                           </children>
+                        </Pane>
+                        <TextField layoutX="294.0" layoutY="68.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
+                        <Button layoutX="318.0" layoutY="103.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Keres" />
+                        <TextField layoutX="293.0" layoutY="136.0" prefHeight="26.0" prefWidth="133.0" promptText="Kórház név" />
+                        <TextField layoutX="294.0" layoutY="168.0" prefHeight="26.0" prefWidth="132.0" promptText="Juttatás" />
+                        <TextField layoutX="294.0" layoutY="202.0" prefHeight="26.0" prefWidth="132.0" promptText="Nyitvatartás" />
+                        <TextField layoutX="294.0" layoutY="236.0" prefHeight="26.0" prefWidth="132.0" promptText="Hely" />
+                        <Button layoutX="318.0" layoutY="276.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
+                        <Button layoutX="318.0" layoutY="460.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
+                        <Pane layoutX="293.0" layoutY="343.0" prefHeight="70.0" prefWidth="134.0">
+                           <children>
+                              <Text layoutX="36.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nyitvatartás" />
+                              <TextField layoutX="6.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-tól" />
+                              <TextField layoutX="69.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-ig" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
