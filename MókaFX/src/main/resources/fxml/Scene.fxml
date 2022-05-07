@@ -11,14 +11,80 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane prefHeight="608.0" prefWidth="907.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Véradás">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="244.0" layoutY="55.0" prefHeight="392.0" prefWidth="430.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Azonosító" />
+                              <TableColumn prefWidth="80.79998779296875" text="Kórház neve" />
+                              <TableColumn prefWidth="76.79998779296875" text="Nyitvatartás" />
+                              <TableColumn prefWidth="75.199951171875" text="Juttatás" />
+                              <TableColumn prefWidth="78.39990234375" text="Helyszín" />
+                           </columns>
+                        </TableView>
+                        <Button layoutX="418.0" layoutY="474.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
+                        <TextField layoutX="713.0" layoutY="59.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
+                        <Button layoutX="718.0" layoutY="98.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Keres" />
+                        <Pane layoutX="723.0" layoutY="162.0" prefHeight="70.0" prefWidth="134.0" style="-fx-background-color: green;">
+                           <children>
+                              <Text layoutX="36.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mennyiség" />
+                              <TextField layoutX="6.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-tól" />
+                              <TextField layoutX="69.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-ig" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="707.0" layoutY="304.0" prefHeight="220.0" prefWidth="187.0" style="-fx-background-color: red;">
+                           <children>
+                              <CheckBox layoutX="65.0" layoutY="4.0" mnemonicParsing="false" text="+A" />
+                              <CheckBox layoutX="65.0" layoutY="24.0" mnemonicParsing="false" text="-A" />
+                              <CheckBox layoutX="68.0" layoutY="45.0" mnemonicParsing="false" text="+B" />
+                              <CheckBox layoutX="72.0" layoutY="66.0" mnemonicParsing="false" text="-B" />
+                              <CheckBox layoutX="70.0" layoutY="86.0" mnemonicParsing="false" text="+AB" />
+                              <CheckBox layoutX="65.0" layoutY="108.0" mnemonicParsing="false" text="-AB" />
+                              <CheckBox layoutX="66.0" layoutY="131.0" mnemonicParsing="false" text="+0" />
+                              <CheckBox layoutX="68.0" layoutY="159.0" mnemonicParsing="false" text="-0" />
+                           </children>
+                        </Pane>
+                        <TextField layoutX="30.0" layoutY="400.0" prefHeight="26.0" prefWidth="132.0" promptText="Vércsoport" />
+                        <TextField layoutX="28.0" layoutY="434.0" prefHeight="26.0" prefWidth="132.0" promptText="Mennyiség" />
+                        <TextField layoutX="29.0" layoutY="366.0" prefHeight="26.0" prefWidth="132.0" promptText="Név" />
+                        <Button layoutX="64.0" layoutY="474.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
+                        <Pane layoutX="705.0" layoutY="276.0" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: red;">
+                           <children>
+                              <Text layoutX="70.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vércsoport" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="25.0" layoutY="88.0" prefHeight="244.0" prefWidth="91.0" style="-fx-background-color: red;">
+                           <children>
+                              <Text layoutX="4.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Összes vér(ml):" textAlignment="CENTER" wrappingWidth="84.03971481323242" />
+                              <Text layoutX="31.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+A" />
+                              <Text layoutX="35.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-A" />
+                              <Text layoutX="35.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+B" />
+                              <Text layoutX="32.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-B" />
+                              <Text layoutX="27.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+AB" />
+                              <Text layoutX="29.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-AB" />
+                              <Text layoutX="31.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+0" />
+                              <Text layoutX="31.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-0" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="124.0" layoutY="88.0" prefHeight="244.0" prefWidth="91.0" style="-fx-background-color: red;">
+                           <children>
+                              <Text layoutX="40.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                              <Text layoutX="40.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                              <Text layoutX="40.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                              <Text layoutX="40.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                              <Text layoutX="39.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="10.333328247070312" />
+                              <Text layoutX="40.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                              <Text layoutX="40.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                              <Text layoutX="36.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
                </content>
             </Tab>
           <Tab text="Véradó pont">
@@ -34,7 +100,7 @@
                               <TableColumn prefWidth="78.39990234375" text="Helyszín" />
                           </columns>
                         </TableView>
-                        <Pane layoutX="86.0" layoutY="90.0" prefHeight="339.0" prefWidth="200.0">
+                        <Pane layoutX="80.0" layoutY="111.0" prefHeight="339.0" prefWidth="200.0" style="-fx-background-color: red;">
                            <children>
                               <CheckBox layoutX="64.0" layoutY="6.0" mnemonicParsing="false" text="Debrecen" />
                               <CheckBox layoutX="64.0" layoutY="29.0" mnemonicParsing="false" text="Budapest" />
@@ -50,7 +116,7 @@
                               <CheckBox layoutX="64.0" layoutY="299.0" mnemonicParsing="false" text="Záhony" />
                            </children>
                         </Pane>
-                        <Pane layoutX="86.0" layoutY="68.0" prefHeight="26.0" prefWidth="200.0">
+                        <Pane layoutX="86.0" layoutY="68.0" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: red;">
                            <children>
                               <Text layoutX="70.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Egyszerűbb" />
                            </children>
@@ -63,7 +129,7 @@
                         <TextField layoutX="294.0" layoutY="236.0" prefHeight="26.0" prefWidth="132.0" promptText="Hely" />
                         <Button layoutX="318.0" layoutY="276.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
                         <Button layoutX="318.0" layoutY="460.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
-                        <Pane layoutX="293.0" layoutY="343.0" prefHeight="70.0" prefWidth="134.0">
+                        <Pane layoutX="293.0" layoutY="343.0" prefHeight="70.0" prefWidth="134.0" style="-fx-background-color: green;">
                            <children>
                               <Text layoutX="36.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nyitvatartás" />
                               <TextField layoutX="6.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-tól" />
