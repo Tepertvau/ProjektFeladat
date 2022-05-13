@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<TabPane fx:id="tabpane" prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tabpane" prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <tabs>
       <Tab text="Véradás">
          <content>
@@ -20,10 +20,10 @@
                   <TableView layoutX="230.0" layoutY="36.0" prefHeight="392.0" prefWidth="430.0" styleClass="tableview">
                      <columns>
                         <TableColumn prefWidth="75.0" text="Azonosító" />
-                        <TableColumn prefWidth="80.79998779296875" text="Nev" />
-                        <TableColumn prefWidth="76.79998779296875" text="Vercsoport" />
-                        <TableColumn prefWidth="75.199951171875" text="Mennyiseg" />
-                        <TableColumn prefWidth="78.39990234375" text="KorhazID" />
+                        <TableColumn prefWidth="80.79998779296875" text="Kórház neve" />
+                        <TableColumn prefWidth="76.79998779296875" text="Nyitvatartás" />
+                        <TableColumn prefWidth="75.199951171875" text="Juttatás" />
+                        <TableColumn prefWidth="78.39990234375" text="Helyszín" />
                      </columns>
                   </TableView>
                   <Button layoutX="131.0" layoutY="402.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Töröl" />

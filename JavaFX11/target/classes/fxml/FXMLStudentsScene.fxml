@@ -23,7 +23,7 @@
                         <TableColumn prefWidth="80.79998779296875" text="Nev" />
                         <TableColumn prefWidth="76.79998779296875" text="Vercsoport" />
                         <TableColumn prefWidth="75.199951171875" text="Mennyiseg" />
-                        <TableColumn prefWidth="78.39990234375" text="KorhazID" />
+                        <TableColumn prefWidth="78.39990234375" text="Helyszín" />
                      </columns>
                   </TableView>
                   <Button layoutX="131.0" layoutY="402.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
