@@ -1,0 +1,64 @@
+#tabpane{
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-tab-min-width: 7em;
+    -fx-tab-min-height: 4em;
+    -fx-tab-max-width:  8em;
+    -fx-tab-max-height:  5em;
+
+}
+
+.pane{
+    -fx-background-color: rgb(89, 89, 89);
+}
+
+.button{
+    -fx-background-color: rgb(89, 89, 89);
+    -fx-text-fill: white;
+}
+
+.tableview
+{
+    -fx-background-color: rgb(89, 89, 89);
+    -fx-text-fill: white;
+}
+
+.text{
+    -fx-text-fill: white;
+}
+
+.tab
+{
+    -fx-background-color: rgb(0, 0, 0);
+    -fx-border-color: rgb(189, 13, 24);
+    -fx-padding: 0, 40, 0, 40;
+    -fx-border-width: 10, 10 ,10 ,10;
+
+
+}
+
+.tab .tab-label {
+    -fx-text-fill: white;
+}
+
+.tab-pane *.tab-header-background {
+    -fx-background-color: rgb(189, 13, 24);
+}
+
+.AnchorPane{
+    -fx-border-color: rgb(189, 13, 24);
+    -fx-border-width: 15, 15 ,15 ,15;
+}
+
+
+.table-cell {
+    -fx-text-fill:rgb(255, 255, 255);
+    }
+
+.table-view .column-header .label{
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-alignment: CENTER;
+    }
+
+.check-box{
+    -fx-text-fill: rgb(255, 255, 255);
+}
