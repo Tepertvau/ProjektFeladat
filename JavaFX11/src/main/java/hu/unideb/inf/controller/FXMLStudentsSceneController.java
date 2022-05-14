@@ -29,19 +29,21 @@ import javax.persistence.Persistence;
 
 
 public class FXMLStudentsSceneController implements Initializable {
+    int MaxMennyiseg;
+    int MinMennyiseg;
     public Boolean CheckIfConNumb(String s){
 
-        Boolean flag = false;
+
         for (int i = 0; i < s.length(); i++){
-            flag = Character.isDigit(s.charAt(i));
-            if(flag) {
+
+            if( Character.isDigit(s.charAt(i))) {
                 return true;
             }
         }
         return false;
     }
     public Boolean CheckIfConChar(String s){
-        System.out.println(s);
+
 
         for (int i = 0; i < s.length(); i++){
 
@@ -51,14 +53,35 @@ public class FXMLStudentsSceneController implements Initializable {
         }
         return false;
     }
-
+    public void InformPopUpWindow(String s){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, s);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.show();
+    }
+    public void WarningPopUpWindow(String s){
+        Alert alert = new Alert(Alert.AlertType.WARNING, s);
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.show();
+    }
 
 
 ////////////////////////////////////////Veradas Tab////////////////////////////////////////
 
+
+//BUTTON INICIALIZALAS
+
     @FXML
     private Button myButton;
+    @FXML
+    private Button myTorolButton;
+    @FXML
+    private Button myKeresButton;
+
+    //BUTTON INICIALIZALAS
+
+
    //VERADO TABLA
+
    @FXML
    private TableView<Verado> VeradoTabla;
 
@@ -84,27 +107,21 @@ public class FXMLStudentsSceneController implements Initializable {
     void VeradoHozzaadButtonPushed(ActionEvent event) {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String VercsoportTomb[] = {"A+", "A-","B+","B-","AB+","AB-","O+","O-"};
+        String[] VercsoportTomb = {"A+", "A-","B+","B-","AB+","AB-","O+","O-"};
     Verado s = new Verado();
 
     Boolean mezoures = false;
     Boolean vercsoportcontain = false;
 
 
-
-
-
        if(VeradoMennyisegField.getText().equals("") || VeradoNevField.getText().equals("") || VeradoVercsoportField.getText().equals("")){
-           Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Ne hagyj üres mezőt.", ButtonType.OK);
-           alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-           alert.show();
+           WarningPopUpWindow("Hiba! Ne hagyj üres mezőt.");
            mezoures = true;
        }
        else {
            if (CheckIfConChar(VeradoMennyisegField.getText())){
-               Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Csak számot adj meg mennyiségnek.", ButtonType.OK);
-               alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-               alert.show();
+              WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
+
            }
 
            for (int i = 0; i < VercsoportTomb.length; i++) {
@@ -114,17 +131,13 @@ public class FXMLStudentsSceneController implements Initializable {
                }
            }
            if (vercsoportcontain == false) {
-               Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Nem megfelelő vércsoport formátum.", ButtonType.OK);
-               alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-               alert.show();
+              WarningPopUpWindow("Hiba! Nem megfelelő vércsoport formátum.");
            }
 
            for (int i = 0; i < VeradoNevField.getText().length(); i++) {
 
                if (CheckIfConNumb(VeradoNevField.getText())) {
-                   Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Rossz név formátum.", ButtonType.OK);
-                   alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                   alert.show();
+                 WarningPopUpWindow("Hiba! Rossz név formátum.");
                    break;
                }
 
@@ -139,9 +152,7 @@ public class FXMLStudentsSceneController implements Initializable {
         entityManager.getTransaction().begin();
         entityManager.persist(s);
         entityManager.getTransaction().commit();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Sikeres Adatfelvétel!");
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.show();
+        InformPopUpWindow("Sikeres Adatfelvétel!");
     }
 
 
@@ -149,12 +160,35 @@ public class FXMLStudentsSceneController implements Initializable {
 
     @FXML
     void VeradoKeresButtonPushed(ActionEvent event) {
-        if(!CheckIfConNumb(VeradoMennyisegMin.getText()) || !CheckIfConNumb(VeradoMennyisegMax.getText())){
-
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Csak számot adj meg mennyiségnek.", ButtonType.OK);
-                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-                alert.show();
+        if(!VeradoMennyisegMin.getText().equals("") && !VeradoMennyisegMax.getText().equals("")) {
+            if (CheckIfConChar(VeradoMennyisegMin.getText()) || CheckIfConChar(VeradoMennyisegMax.getText())) {
+                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
             }
+            else
+            {
+                MaxMennyiseg = Integer.parseInt(VeradoMennyisegMax.getText());
+                MinMennyiseg = Integer.parseInt(VeradoMennyisegMin.getText());
+            }
+        }
+        else if(VeradoMennyisegMin.getText().equals("") && !VeradoMennyisegMax.getText().equals("")) {
+            if (CheckIfConChar(VeradoMennyisegMax.getText())) {
+                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
+            }
+            else
+            {
+             MaxMennyiseg = Integer.parseInt(VeradoMennyisegMax.getText());
+            }
+        }
+        else if(!VeradoMennyisegMin.getText().equals("") && VeradoMennyisegMax.getText().equals("")) {
+            if (CheckIfConChar(VeradoMennyisegMin.getText()) || CheckIfConChar(VeradoMennyisegMax.getText())) {
+                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
+            }
+            else{
+                MinMennyiseg = Integer.parseInt(VeradoMennyisegMin.getText());
+            }
+        }
+
+
 
         }
 
