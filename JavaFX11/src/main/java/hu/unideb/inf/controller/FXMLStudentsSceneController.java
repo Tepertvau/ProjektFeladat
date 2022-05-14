@@ -29,21 +29,21 @@ import javax.persistence.Persistence;
 
 
 public class FXMLStudentsSceneController implements Initializable {
-    int MaxMennyiseg;
-    int MinMennyiseg;
+    VeradoDAO aDAO = new JpaVeradoDAO();
+    Verado s = new Verado();
     public Boolean CheckIfConNumb(String s){
 
-
+        Boolean flag = false;
         for (int i = 0; i < s.length(); i++){
-
-            if( Character.isDigit(s.charAt(i))) {
+            flag = Character.isDigit(s.charAt(i));
+            if(flag) {
                 return true;
             }
         }
         return false;
     }
     public Boolean CheckIfConChar(String s){
-
+        System.out.println(s);
 
         for (int i = 0; i < s.length(); i++){
 
@@ -53,35 +53,14 @@ public class FXMLStudentsSceneController implements Initializable {
         }
         return false;
     }
-    public void InformPopUpWindow(String s){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, s);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.show();
-    }
-    public void WarningPopUpWindow(String s){
-        Alert alert = new Alert(Alert.AlertType.WARNING, s);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.show();
-    }
+
 
 
 ////////////////////////////////////////Veradas Tab////////////////////////////////////////
 
-
-//BUTTON INICIALIZALAS
-
     @FXML
     private Button myButton;
-    @FXML
-    private Button myTorolButton;
-    @FXML
-    private Button myKeresButton;
-
-    //BUTTON INICIALIZALAS
-
-
    //VERADO TABLA
-
    @FXML
    private TableView<Verado> VeradoTabla;
 
@@ -107,21 +86,28 @@ public class FXMLStudentsSceneController implements Initializable {
     void VeradoHozzaadButtonPushed(ActionEvent event) {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String[] VercsoportTomb = {"A+", "A-","B+","B-","AB+","AB-","O+","O-"};
-    Verado s = new Verado();
+        String VercsoportTomb[] = {"A+", "A-","B+","B-","AB+","AB-","O+","O-"};
+    //Verado s = new Verado();
+
 
     Boolean mezoures = false;
     Boolean vercsoportcontain = false;
 
 
+
+
+
        if(VeradoMennyisegField.getText().equals("") || VeradoNevField.getText().equals("") || VeradoVercsoportField.getText().equals("")){
-           WarningPopUpWindow("Hiba! Ne hagyj üres mezőt.");
+           Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Ne hagyj üres mezőt.", ButtonType.OK);
+           alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+           alert.show();
            mezoures = true;
        }
        else {
            if (CheckIfConChar(VeradoMennyisegField.getText())){
-              WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-
+               Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Csak számot adj meg mennyiségnek.", ButtonType.OK);
+               alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+               alert.show();
            }
 
            for (int i = 0; i < VercsoportTomb.length; i++) {
@@ -131,13 +117,17 @@ public class FXMLStudentsSceneController implements Initializable {
                }
            }
            if (vercsoportcontain == false) {
-              WarningPopUpWindow("Hiba! Nem megfelelő vércsoport formátum.");
+               Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Nem megfelelő vércsoport formátum.", ButtonType.OK);
+               alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+               alert.show();
            }
 
            for (int i = 0; i < VeradoNevField.getText().length(); i++) {
 
                if (CheckIfConNumb(VeradoNevField.getText())) {
-                 WarningPopUpWindow("Hiba! Rossz név formátum.");
+                   Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Rossz név formátum.", ButtonType.OK);
+                   alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                   alert.show();
                    break;
                }
 
@@ -149,10 +139,13 @@ public class FXMLStudentsSceneController implements Initializable {
         s.setVercsoport(VeradoVercsoportField.getText());
         s.setMennyiseg(Integer.parseInt(VeradoMennyisegField.getText()));
 
-        entityManager.getTransaction().begin();
+        /*entityManager.getTransaction().begin();
         entityManager.persist(s);
-        entityManager.getTransaction().commit();
-        InformPopUpWindow("Sikeres Adatfelvétel!");
+        entityManager.getTransaction().commit();*/
+        aDAO.saveVerado(s);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Sikeres Adatfelvétel!");
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.show();
     }
 
 
@@ -160,35 +153,12 @@ public class FXMLStudentsSceneController implements Initializable {
 
     @FXML
     void VeradoKeresButtonPushed(ActionEvent event) {
-        if(!VeradoMennyisegMin.getText().equals("") && !VeradoMennyisegMax.getText().equals("")) {
-            if (CheckIfConChar(VeradoMennyisegMin.getText()) || CheckIfConChar(VeradoMennyisegMax.getText())) {
-                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-            }
-            else
-            {
-                MaxMennyiseg = Integer.parseInt(VeradoMennyisegMax.getText());
-                MinMennyiseg = Integer.parseInt(VeradoMennyisegMin.getText());
-            }
-        }
-        else if(VeradoMennyisegMin.getText().equals("") && !VeradoMennyisegMax.getText().equals("")) {
-            if (CheckIfConChar(VeradoMennyisegMax.getText())) {
-                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-            }
-            else
-            {
-             MaxMennyiseg = Integer.parseInt(VeradoMennyisegMax.getText());
-            }
-        }
-        else if(!VeradoMennyisegMin.getText().equals("") && VeradoMennyisegMax.getText().equals("")) {
-            if (CheckIfConChar(VeradoMennyisegMin.getText()) || CheckIfConChar(VeradoMennyisegMax.getText())) {
-                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-            }
-            else{
-                MinMennyiseg = Integer.parseInt(VeradoMennyisegMin.getText());
-            }
-        }
+        if(!CheckIfConNumb(VeradoMennyisegMin.getText()) || !CheckIfConNumb(VeradoMennyisegMax.getText())){
 
-
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Hiba! Csak számot adj meg mennyiségnek.", ButtonType.OK);
+                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                alert.show();
+            }
 
         }
 
@@ -316,9 +286,35 @@ public class FXMLStudentsSceneController implements Initializable {
 
 
     //VERADOPONT BUTTON
+    @FXML
+    private Button VeradoPontHButton;
 
     @FXML
     void VeradoPontHozzaadButtonPushed(ActionEvent event) {
+        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
+        final EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Korhaz korhaz = new Korhaz();
+        korhaz.setNev(VeradoPontNeveField.getText());
+        korhaz.setIdo(VeradoPontNyitvatartasField.getText());
+        if(!VeradoPontJuttatasField.getText().equals("")) {
+            Boolean seged=null;
+            if (VeradoPontJuttatasField.getText().equals("true")) {
+                seged = true;
+            } else if (VeradoPontJuttatasField.getText().equals("false")) {
+                seged = false;
+            }
+
+            korhaz.setJuttatas(seged);
+        }
+        korhaz.setHelyszin(VeradoPontHelyField.getText());
+        /*entityManager.getTransaction().begin();
+        entityManager.persist(korhaz);
+        entityManager.getTransaction().commit();*/
+        korhaz.getVeradok().add(s);
+        aDAO.saveKorhaz(korhaz);
+
+
+
 
     }
 
