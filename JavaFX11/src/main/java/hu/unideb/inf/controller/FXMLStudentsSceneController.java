@@ -29,6 +29,8 @@ import javax.persistence.Persistence;
 
 
 public class FXMLStudentsSceneController implements Initializable {
+    VeradoDAO aDAO = new JpaVeradoDAO();
+    Verado s = new Verado();
     int MaxMennyiseg;
     int MinMennyiseg;
     public Boolean CheckIfConNumb(String s){
@@ -108,7 +110,7 @@ public class FXMLStudentsSceneController implements Initializable {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
         String[] VercsoportTomb = {"A+", "A-","B+","B-","AB+","AB-","O+","O-"};
-    Verado s = new Verado();
+    //Verado s = new Verado();
 
     Boolean mezoures = false;
     Boolean vercsoportcontain = false;
@@ -149,10 +151,13 @@ public class FXMLStudentsSceneController implements Initializable {
         s.setVercsoport(VeradoVercsoportField.getText());
         s.setMennyiseg(Integer.parseInt(VeradoMennyisegField.getText()));
 
-        entityManager.getTransaction().begin();
+        /*entityManager.getTransaction().begin();
         entityManager.persist(s);
-        entityManager.getTransaction().commit();
-        InformPopUpWindow("Sikeres Adatfelvétel!");
+        entityManager.getTransaction().commit();*/
+        aDAO.saveVerado(s);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Sikeres Adatfelvétel!");
+        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        alert.show();
     }
 
 
@@ -316,10 +321,32 @@ public class FXMLStudentsSceneController implements Initializable {
 
 
     //VERADOPONT BUTTON
+    @FXML
+    private Button VeradoPontHButton;
 
     @FXML
     void VeradoPontHozzaadButtonPushed(ActionEvent event) {
+        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
+        final EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Korhaz korhaz = new Korhaz();
+        korhaz.setNev(VeradoPontNeveField.getText());
+        korhaz.setIdo(VeradoPontNyitvatartasField.getText());
+        if(!VeradoPontJuttatasField.getText().equals("")) {
+            Boolean seged=null;
+            if (VeradoPontJuttatasField.getText().equals("true")) {
+                seged = true;
+            } else if (VeradoPontJuttatasField.getText().equals("false")) {
+                seged = false;
+            }
 
+            korhaz.setJuttatas(seged);
+        }
+        korhaz.setHelyszin(VeradoPontHelyField.getText());
+        /*entityManager.getTransaction().begin();
+        entityManager.persist(korhaz);
+        entityManager.getTransaction().commit();*/
+        korhaz.getVeradok().add(s);
+        aDAO.saveKorhaz(korhaz);
     }
 
     @FXML
