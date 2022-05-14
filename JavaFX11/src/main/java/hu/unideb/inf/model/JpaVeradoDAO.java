@@ -11,8 +11,10 @@ public class JpaVeradoDAO implements VeradoDAO{
     final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
     final EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    @Override
-    public void saveVerado(Verado a) {
+
+
+
+    public  void saveVerado(Verado a) {
         entityManager.getTransaction().begin();
         entityManager.persist(a);
         entityManager.getTransaction().commit();

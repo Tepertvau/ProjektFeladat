@@ -2,6 +2,9 @@ package hu.unideb.inf.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public class Verado implements Serializable {
@@ -12,6 +15,10 @@ public class Verado implements Serializable {
     private String nev;
     private String vercsoport;
     private int mennyiseg;
+
+    public Verado() {
+
+    }
 
     public int getId() {
         return id;
@@ -29,9 +36,7 @@ public class Verado implements Serializable {
         return mennyiseg;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public void setNev(String nev) {
         this.nev = nev;
@@ -43,5 +48,10 @@ public class Verado implements Serializable {
 
     public void setMennyiseg(int mennyiseg) {
         this.mennyiseg = mennyiseg;
+    }
+
+    @Override
+    public String toString() {
+        return this.nev + " " + this.vercsoport + " "+ this.mennyiseg;
     }
 }
