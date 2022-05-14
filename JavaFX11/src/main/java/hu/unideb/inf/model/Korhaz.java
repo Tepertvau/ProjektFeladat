@@ -12,14 +12,14 @@ public class Korhaz {
     private int Id;
     private String nev;
     private String ido;
-    private String juttatas;
+    private boolean juttatas;
     private String helyszin;
 
-    public String getJuttatas() {
+    public boolean getJuttatas() {
         return juttatas;
     }
 
-    public void setJuttatas(String juttatas) {
+    public void setJuttatas(boolean juttatas) {
         this.juttatas = juttatas;
     }
 
@@ -51,9 +51,7 @@ public class Korhaz {
         return veradok;
     }
 
-    public void setId(int id) {
-        Id = id;
-    }
+
 
     public void setNev(String nev) {
         this.nev = nev;
