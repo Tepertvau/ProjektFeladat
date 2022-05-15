@@ -4,6 +4,8 @@ package hu.unideb.inf.controller;
 
 import hu.unideb.inf.model.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -26,11 +28,16 @@ import net.bytebuddy.pool.TypePool;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 
 public class FXMLStudentsSceneController implements Initializable {
     VeradoDAO aDAO = new JpaVeradoDAO();
-    Verado s = new Verado();
+    Korhaz help=new Korhaz();
+
+    Korhaz korhaz = new Korhaz();
+    List<Korhaz> korhazLista = new ArrayList<>();
+    List<Verado> veradoLista= new ArrayList<>();
     int MaxMennyiseg;
     int MinMennyiseg;
     public Boolean CheckIfConNumb(String s){
@@ -105,7 +112,7 @@ public class FXMLStudentsSceneController implements Initializable {
 //VERADO TABLA VEGE
 
     //VERADO BUTTONOK
-    @FXML
+    /*@FXML
     void VeradoHozzaadButtonPushed(ActionEvent event) {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -147,21 +154,25 @@ public class FXMLStudentsSceneController implements Initializable {
        }
 
     if (CheckIfConChar(VeradoMennyisegField.getText()) == false && mezoures == false && vercsoportcontain == true && CheckIfConNumb(VeradoNevField.getText()) == false) {
+        //Verado s = new Verado(VeradoNevField.getText(), VeradoVercsoportField.getText(), Integer.parseInt(VeradoMennyisegField.getText()));
+        Verado s = new Verado();
         s.setNev(VeradoNevField.getText());
         s.setVercsoport(VeradoVercsoportField.getText());
         s.setMennyiseg(Integer.parseInt(VeradoMennyisegField.getText()));
+        veradoLista.add(s);
+
 
         /*entityManager.getTransaction().begin();
         entityManager.persist(s);
         entityManager.getTransaction().commit();*/
-        aDAO.saveVerado(s);
+       /* aDAO.saveVerado(s);
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Sikeres Adatfelvétel!");
         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
         alert.show();
     }
 
 
-    }
+    }*/
 
     @FXML
     void VeradoKeresButtonPushed(ActionEvent event) {
@@ -325,10 +336,81 @@ public class FXMLStudentsSceneController implements Initializable {
     private Button VeradoPontHButton;
 
     @FXML
+    private Button VeradoPontHButton1;
+
+    @FXML
+    private TextField korhazHozzaField;
+
+
+    /*public static void beolvas(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
+        EntityManager em = emf.createEntityManager();
+        try{
+            em.getTransaction().begin();
+//Select all the record from student table
+            Query query = em.createQuery("SELECT st FROM Verado st");
+            List lst = query.getResultList();
+            Iterator it = lst.iterator();
+            while (it.hasNext()){
+                Verado beolvasas = (Verado) it.next();
+                Korhaz beolvaso = (Korhaz) it.next();
+                System.out.print("Id:"+beolvasas.getId());
+                System.out.print(" mennyiseg:"+beolvasas.getMennyiseg());
+                System.out.print(" nev:"+beolvasas.getNev());
+                System.out.print(" vercsoport:"+beolvasas.getVercsoport());
+
+            }
+            em.getTransaction().commit();
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        finally{
+            em.close();
+        }
+    }*/
+
+
+
+    @FXML
     void VeradoPontHozzaadButtonPushed(ActionEvent event) {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Korhaz beolvaso;
+        /*List<Verado> beolvasott1=null;
+        List<Korhaz> beolvasott2=null;
+        try{
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("Select st FROM Verado st");
+            List Ist = query.getResultList();
+            Iterator it = Ist.iterator();
+            while(it.hasNext()){
+                Verado beolvasas= (Verado) it.next();
+                beolvasott1= (List<Verado>) beolvasas;
+                beolvaso= (Korhaz) it.next();
+                beolvasott2= (List<Korhaz>) beolvaso;
+                for (int i=0; i<korhazLista.size();i++){
+                    if(korhazLista.get(i).getNev().equals(korhazHozzaField.getText())){
+                        help=korhazLista.get(i);
+                    }
+
+                }
+                for (int i=0; i<((List<Korhaz>) beolvaso).size();i++){
+                    if(beolvaso.getNev().equals(korhazHozzaField.getText())){
+                        help=beolvaso;
+                    }
+                }
+            }
+            entityManager.getTransaction().commit();
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        finally{
+            entityManager.close();
+        }*/
         Korhaz korhaz = new Korhaz();
+        List<Korhaz> korhazLista = new ArrayList<>();
         korhaz.setNev(VeradoPontNeveField.getText());
         korhaz.setIdo(VeradoPontNyitvatartasField.getText());
         if(!VeradoPontJuttatasField.getText().equals("")) {
@@ -342,12 +424,109 @@ public class FXMLStudentsSceneController implements Initializable {
             korhaz.setJuttatas(seged);
         }
         korhaz.setHelyszin(VeradoPontHelyField.getText());
+        korhazLista.add(korhaz);
         /*entityManager.getTransaction().begin();
         entityManager.persist(korhaz);
         entityManager.getTransaction().commit();*/
-        korhaz.getVeradok().add(s);
+        //System.out.println(korhazLista);
+        /*for(Korhaz korhazseged : korhazLista){
+            System.out.println(korhazseged.getNev());
+            if(korhazseged.getNev().equals(korhazHozzaField.getText())){
+                help=korhazseged;
+                System.out.println(korhazseged);
+
+            }
+        }*/
+        for (int i=0; i<korhazLista.size();i++){
+            if(korhazLista.get(i).getNev().equals(korhazHozzaField.getText())){
+                help=korhazLista.get(i);
+            }
+        }
+        System.out.println(help.getNev());
+        System.out.println(korhazHozzaField.getText());
+        //korhaz.getVeradok().add(s);
         aDAO.saveKorhaz(korhaz);
     }
+    @FXML
+    void VeradoHozzaadButtonPushed(ActionEvent event) {
+        final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
+        final EntityManager entityManager = entityManagerFactory.createEntityManager();
+        String[] VercsoportTomb = {"A+", "A-","B+","B-","AB+","AB-","O+","O-"};
+        //Verado s = new Verado();
+
+        Boolean mezoures = false;
+        Boolean vercsoportcontain = false;
+
+
+        if(VeradoMennyisegField.getText().equals("") || VeradoNevField.getText().equals("") || VeradoVercsoportField.getText().equals("")){
+            WarningPopUpWindow("Hiba! Ne hagyj üres mezőt.");
+            mezoures = true;
+        }
+        else {
+            if (CheckIfConChar(VeradoMennyisegField.getText())){
+                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
+
+            }
+
+            for (int i = 0; i < VercsoportTomb.length; i++) {
+                if (VercsoportTomb[i].equals(VeradoVercsoportField.getText())) {
+                    vercsoportcontain = true;
+                    break;
+                }
+            }
+            if (vercsoportcontain == false) {
+                WarningPopUpWindow("Hiba! Nem megfelelő vércsoport formátum.");
+            }
+
+            for (int i = 0; i < VeradoNevField.getText().length(); i++) {
+
+                if (CheckIfConNumb(VeradoNevField.getText())) {
+                    WarningPopUpWindow("Hiba! Rossz név formátum.");
+                    break;
+                }
+
+            }
+        }
+
+        if (CheckIfConChar(VeradoMennyisegField.getText()) == false && mezoures == false && vercsoportcontain == true && CheckIfConNumb(VeradoNevField.getText()) == false) {
+            //Verado s = new Verado(VeradoNevField.getText(), VeradoVercsoportField.getText(), Integer.parseInt(VeradoMennyisegField.getText()));
+            Verado s = new Verado();
+            s.setNev(VeradoNevField.getText());
+            s.setVercsoport(VeradoVercsoportField.getText());
+            s.setMennyiseg(Integer.parseInt(VeradoMennyisegField.getText()));
+            veradoLista.add(s);
+
+            /*for(Korhaz korhazseged:korhazLista){
+                if(korhazseged.getNev().equals(korhazHozzaField.getText())){
+                    help.getVeradok().add(s);
+                    System.out.println(korhazseged);
+
+                }
+            }*/
+            help.getVeradok().add(s);
+
+
+
+        /*entityManager.getTransaction().begin();
+        entityManager.persist(s);
+        entityManager.getTransaction().commit();*/
+            aDAO.saveVerado(s);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Sikeres Adatfelvétel!");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
 
     @FXML
     void VeradoPontKeresButtonPushed(ActionEvent event) {
