@@ -16,6 +16,15 @@ public class Verado implements Serializable {
     private String nev;
     private String vercsoport;
     private int mennyiseg;
+    private int KorhazID;
+
+    public int getKorhazID() {
+        return KorhazID;
+    }
+
+    public void setKorhazID(int korhazID) {
+        KorhazID = korhazID;
+    }
     //ArrayList<Verado> veradolista = new ArrayList<Verado>();
 
     public Verado() {
@@ -40,6 +49,9 @@ public class Verado implements Serializable {
     }
 
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setNev(String nev) {
         this.nev = nev;
