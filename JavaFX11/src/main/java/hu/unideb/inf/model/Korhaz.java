@@ -7,6 +7,8 @@ import java.util.List;
 @Entity
 public class Korhaz {
 
+
+
     @Id
     @GeneratedValue
     private int Id;
@@ -14,6 +16,17 @@ public class Korhaz {
     private String ido;
     private boolean juttatas;
     private String helyszin;
+
+
+    public Korhaz() {
+    }
+    public Korhaz(String helyszin, String ido, boolean juttatas, String nev) {
+
+        this.helyszin=helyszin;
+        this.ido=ido;
+        this.juttatas=juttatas;
+        this.nev=nev;
+    }
 
     public boolean getJuttatas() {
         return juttatas;
@@ -37,6 +50,10 @@ public class Korhaz {
 
     public int getId() {
         return Id;
+    }
+
+    public void setId(int id) {
+        this.Id = id;
     }
 
     public String getNev() {
