@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<TabPane prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.FXMLStudentsSceneController">
+<TabPane prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.FXMLStudentsSceneController">
    <tabs>
       <Tab text="Véradás">
          <content>
@@ -72,14 +72,14 @@
                   </Pane>
                   <Pane layoutX="121.0" layoutY="36.0" prefHeight="244.0" prefWidth="91.0" styleClass="pane">
                      <children>
-                        <Text fill="WHITE" layoutX="40.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-                        <Text fill="WHITE" layoutX="40.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-                        <Text fill="WHITE" layoutX="40.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-                        <Text fill="WHITE" layoutX="40.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-                        <Text fill="WHITE" layoutX="39.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="10.333328247070312" />
-                        <Text fill="WHITE" layoutX="40.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-                        <Text fill="WHITE" layoutX="40.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
-                        <Text fill="WHITE" layoutX="40.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                        <Text fx:id="APlusCounter" fill="WHITE" layoutX="40.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
+                        <Text fx:id="AMCounter" fill="WHITE" layoutX="40.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
+                        <Text fx:id="BPCounter" fill="WHITE" layoutX="40.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
+                        <Text fx:id="BMCounter" fill="WHITE" layoutX="40.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
+                        <Text fx:id="ABPCounter" fill="WHITE" layoutX="39.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
+                        <Text fx:id="ABMCounter" fill="WHITE" layoutX="40.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
+                        <Text fx:id="OPCounter" fill="WHITE" layoutX="40.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
+                        <Text fx:id="OMCounter" fill="WHITE" layoutX="40.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
                      </children>
                   </Pane>
                   <TextField fx:id="korhazHozzaField" layoutX="24.0" layoutY="402.0" prefHeight="26.0" prefWidth="185.0" promptText="Melyik_korhaz" />
