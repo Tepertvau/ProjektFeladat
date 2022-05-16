@@ -4,6 +4,7 @@ package hu.unideb.inf.controller;
 
 import hu.unideb.inf.model.*;
 import java.net.URL;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -373,10 +374,74 @@ public class FXMLStudentsSceneController implements Initializable {
 
 
     @FXML
-    void VeradoPontHozzaadButtonPushed(ActionEvent event) {
+    void VeradoPontHozzaadButtonPushed(ActionEvent event) throws SQLException {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
         Korhaz beolvaso;
+        int segedid=0;
+        /*try{
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("Select * FROM db_jpa_fxml_KORHAZ");
+            List ist = query.getResultList();
+            Iterator it = ist.iterator();
+            while(it.hasNext()){
+                Korhaz korhazak= (Korhaz) it.next();
+                osszkorhaz.add(korhazak);
+            }
+            entityManager.getTransaction().commit();
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        finally{
+            entityManager.close();
+        }
+
+
+        for(int i=0; i<osszkorhaz.size();i++){
+            System.out.println(osszkorhaz.get(i).getNev());
+        }*/
+       /* List<Korhaz> osszkorhaz=new ArrayList<>();
+        Korhaz segitseg=new Korhaz();
+
+        String mysqlUrl = "jdbc:h2:file:~/db_jpa_fxml";
+        Connection con = DriverManager.getConnection(mysqlUrl, "sa", "");
+        System.out.println("Connection established......");
+        //Creating a Statement object
+        Statement stmt = con.createStatement();
+        //Retrieving the data
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Korhaz");
+        System.out.println("Tables in the current database: ");
+
+
+        while(rs.next()) {
+            //System.out.print(rs.getString(1));
+
+            Korhaz segit=new Korhaz(rs.getString("helyszin"),rs.getString("ido"),rs.getBoolean("juttatas"),rs.getString("nev"));
+            segit.setId(rs.getInt("ID"));
+            if(segit.getNev().equals(korhazHozzaField.getText())){
+                help=segit;
+            }
+
+            osszkorhaz.add(segit);
+
+            /*segitseg.setHelyszin("helyszin");
+            segitseg.setNev("nev");
+            segitseg.setJuttatas(true);
+            segitseg.setIdo("ido");
+            osszkorhaz.add(segitseg);*/
+            //System.out.println();
+        //}
+
+
+        /*System.out.println("A segito neve: "+help.getNev());
+        for (int i=0; i<osszkorhaz.size();i++){
+            System.out.println(osszkorhaz.get(i).getNev()+osszkorhaz.get(i).getId());
+        }*/
+
+
+
+
         /*List<Verado> beolvasott1=null;
         List<Korhaz> beolvasott2=null;
         try{
@@ -437,18 +502,22 @@ public class FXMLStudentsSceneController implements Initializable {
 
             }
         }*/
-        for (int i=0; i<korhazLista.size();i++){
-            if(korhazLista.get(i).getNev().equals(korhazHozzaField.getText())){
-                help=korhazLista.get(i);
+
+
+
+
+        /*for (int i=0; i<osszkorhaz.size();i++){
+            if(osszkorhaz.get(i).getNev().equals(korhazHozzaField.getText())){
+                help=osszkorhaz.get(i);
             }
-        }
-        System.out.println(help.getNev());
+        }*/
+        System.out.println(help.getNev()+" "+help.getId());
         System.out.println(korhazHozzaField.getText());
         //korhaz.getVeradok().add(s);
         aDAO.saveKorhaz(korhaz);
     }
     @FXML
-    void VeradoHozzaadButtonPushed(ActionEvent event) {
+    void VeradoHozzaadButtonPushed(ActionEvent event) throws SQLException {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
         String[] VercsoportTomb = {"A+", "A-","B+","B-","AB+","AB-","O+","O-"};
@@ -503,14 +572,62 @@ public class FXMLStudentsSceneController implements Initializable {
 
                 }
             }*/
-            help.getVeradok().add(s);
+
+
+            List<Korhaz> osszkorhaz=new ArrayList<>();
+            Korhaz segitseg=new Korhaz();
+
+            String mysqlUrl = "jdbc:h2:file:~/db_jpa_fxml";
+            Connection con = DriverManager.getConnection(mysqlUrl, "sa", "");
+            System.out.println("Connection established......");
+            //Creating a Statement object
+            Statement stmt = con.createStatement();
+            //Retrieving the data
+            ResultSet rs = stmt.executeQuery("SELECT * FROM Korhaz");
+            System.out.println("Tables in the current database: ");
+
+
+            while(rs.next()) {
+                //System.out.print(rs.getString(1));
+
+                Korhaz segit=new Korhaz(rs.getString("helyszin"),rs.getString("ido"),rs.getBoolean("juttatas"),rs.getString("nev"));
+                segit.setId(rs.getInt("ID"));
+                if(segit.getNev().equals(korhazHozzaField.getText())){
+                    help=segit;
+                }
+
+                osszkorhaz.add(segit);
+
+            /*segitseg.setHelyszin("helyszin");
+            segitseg.setNev("nev");
+            segitseg.setJuttatas(true);
+            segitseg.setIdo("ido");
+            osszkorhaz.add(segitseg);*/
+                //System.out.println();
+            }
+
+
+            //System.out.println("A segito neve: "+help.getNev());
+            /*for (int i=0; i<osszkorhaz.size();i++){
+                System.out.println(osszkorhaz.get(i).getNev()+osszkorhaz.get(i).getId());
+            }*/
+
+
+
+            /*korhaz=help;*/
+            System.out.println("EGy");
+            System.out.println(help.getNev()+" "+help.getId());
+            System.out.println("Ketto");
+            aDAO.saveVerado(s);
+            korhaz=help;
+            korhaz.getVeradok().add(s);
 
 
 
         /*entityManager.getTransaction().begin();
         entityManager.persist(s);
         entityManager.getTransaction().commit();*/
-            aDAO.saveVerado(s);
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Sikeres Adatfelvétel!");
             alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             alert.show();

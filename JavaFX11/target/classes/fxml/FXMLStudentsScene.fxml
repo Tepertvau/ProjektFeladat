@@ -26,7 +26,7 @@
                         <TableColumn fx:id="KorhazIDOszlop" prefWidth="78.39990234375" text="KorhazID" />
                      </columns>
                   </TableView>
-                  <Button layoutX="131.0" layoutY="402.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
+                  <Button layoutX="125.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
                   <TextField fx:id="VeradoKeresoField" layoutX="676.0" layoutY="42.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
                   <Button layoutX="695.0" layoutY="75.0" mnemonicParsing="false" onAction="#VeradoKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres" />
                   <Pane layoutX="675.0" layoutY="114.0" prefHeight="70.0" prefWidth="134.0" styleClass="pane">
@@ -51,7 +51,7 @@
                   <TextField fx:id="VeradoVercsoportField" layoutX="29.0" layoutY="328.0" prefHeight="26.0" prefWidth="185.0" promptText="Vércsoport" />
                   <TextField fx:id="VeradoMennyisegField" layoutX="29.0" layoutY="364.0" prefHeight="26.0" prefWidth="185.0" promptText="Mennyiség" />
                   <TextField fx:id="VeradoNevField" layoutX="29.0" layoutY="290.0" prefHeight="26.0" prefWidth="185.0" promptText="Név" />
-                  <Button fx:id="myButton" layoutX="29.0" layoutY="402.0" mnemonicParsing="false" onAction="#VeradoHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
+                  <Button fx:id="myButton" layoutX="29.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
                   <Pane layoutX="692.0" layoutY="198.0" prefHeight="34.0" prefWidth="88.0" styleClass="pane">
                      <children>
                         <Text fill="WHITE" layoutX="15.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vércsoport" />
@@ -82,8 +82,7 @@
                         <Text fill="WHITE" layoutX="40.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                      </children>
                   </Pane>
-                  <Button fx:id="VeradoPontHButton1" layoutX="230.0" layoutY="467.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
-                  <TextField fx:id="korhazHozzaField" layoutX="29.0" layoutY="467.0" prefHeight="26.0" prefWidth="185.0" promptText="Mennyiség" />
+                  <TextField fx:id="korhazHozzaField" layoutX="24.0" layoutY="402.0" prefHeight="26.0" prefWidth="185.0" promptText="Melyik_korhaz" />
                </children>
             </AnchorPane>
          </content>
