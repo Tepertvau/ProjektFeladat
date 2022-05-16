@@ -81,4 +81,9 @@ public class Korhaz {
     public void setVeradok(List<Verado> veradok) {
         this.veradok = veradok;
     }
+
+    @Override
+    public String toString() {
+        return this.Id + " " + this.nev + " "+ this.ido+ " "+ this.juttatas+ " "+ this.helyszin;
+    }
 }
