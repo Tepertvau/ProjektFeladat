@@ -8,8 +8,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Filter;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -161,7 +165,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
         }
     }
-
+    //private final ObservableList<Verado> dataList = FXCollections.observableArrayList();
 
     public void VUpdateTabeleView(){
         int i = 0;
@@ -171,6 +175,10 @@ public class FXMLStudentsSceneController implements Initializable {
         VercsoportOszlop.setCellValueFactory(new PropertyValueFactory<>("nev"));
         MennyisegOszlop.setCellValueFactory(new PropertyValueFactory<>("vercsoport"));
         KorhazIDOszlop.setCellValueFactory(new PropertyValueFactory<>("korhazID"));
+
+
+
+
 
         try {
             ConnectionDB cn = new ConnectionDB();
@@ -189,11 +197,51 @@ public class FXMLStudentsSceneController implements Initializable {
                 veradoObservableList.add(veradoseged);
                 i++;
             }
-            VeradoTabla.setItems(veradoObservableList);
+            //VeradoTabla.setItems(veradoObservableList);
+            FilteredList<Verado> filteredData = new FilteredList<>(veradoObservableList, b -> true);
+
+            // 2. Set the filter Predicate whenever the filter changes.
+            VeradoKeresoField.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(verado -> {
+                    // If filter text is empty, display all persons.
+
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }else {
+
+                        // Compare first name and last name of every person with filter text.
+                        String lowerCaseFilter = newValue.toLowerCase();
+
+                        if (verado.getNev().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                            return true; //nev
+                        } else if (verado.getVercsoport().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+                            return true; //vercsoport
+                        } else if (String.valueOf(verado.getMennyiseg()).indexOf(lowerCaseFilter) != -1)
+                            return true; //
+                        else
+                            return false; // Does not match.
+                    }
+                });
+
+
+            });
+            // 3. Wrap the FilteredList in a SortedList.
+            //SortedList<Verado> sortedData = new SortedList<>(filteredData);
+
+            // 4. Bind the SortedList comparator to the TableView comparator.
+            // 	  Otherwise, sorting the TableView would have no effect.
+            //sortedData.comparatorProperty().bind(VeradoTabla.comparatorProperty());
+
+            // 5. Add sorted (and filtered) data to the table.
+            //VeradoTabla.setItems(sortedData);
             SetBloodCounters();
+            VeradoTabla.setItems(veradoObservableList);
         }catch (Exception e){
 
         }
+
+
+
     }
 
     public void SetBloodCounters(){
@@ -213,8 +261,8 @@ public class FXMLStudentsSceneController implements Initializable {
             if (veradoLista.get(i).getVercsoport().equals("B-")) BM += veradoLista.get(i).getMennyiseg();
             if (veradoLista.get(i).getVercsoport().equals("AB+")) ABP += veradoLista.get(i).getMennyiseg();
             if (veradoLista.get(i).getVercsoport().equals("AB-")) ABM += veradoLista.get(i).getMennyiseg();
-            if (veradoLista.get(i).getVercsoport().equals("O+")) OP += veradoLista.get(i).getMennyiseg();
-            if (veradoLista.get(i).getVercsoport().equals("O-")) OM += veradoLista.get(i).getMennyiseg();
+            if (veradoLista.get(i).getVercsoport().equals("0+")) OP += veradoLista.get(i).getMennyiseg();
+            if (veradoLista.get(i).getVercsoport().equals("0-")) OM += veradoLista.get(i).getMennyiseg();
         }
             APlusCounter.setText(String.valueOf(AP));
             AMCounter.setText(String.valueOf(AM));
@@ -275,7 +323,7 @@ public class FXMLStudentsSceneController implements Initializable {
     void VeradoHozzaadButtonPushed(ActionEvent event) throws SQLException {
         final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("br.com.fredericci.pu");
         final EntityManager entityManager = entityManagerFactory.createEntityManager();
-        String[] VercsoportTomb = {"A+", "A-","B+","B-","AB+","AB-","O+","O-"};
+        String[] VercsoportTomb = {"A+", "A-","B+","B-","AB+","AB-","0+","0-"};
 
 
         Boolean mezoures = false;
