@@ -11,23 +11,23 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<TabPane prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.FXMLStudentsSceneController">
+<TabPane prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.FXMLStudentsSceneController">
    <tabs>
       <Tab text="Véradás">
          <content>
             <AnchorPane prefHeight="554.0" prefWidth="906.0" styleClass="AnchorPane">
                <children>
-                  <TableView fx:id="VeradoTabla" layoutX="230.0" layoutY="36.0" prefHeight="392.0" prefWidth="430.0" styleClass="tableview">
+                  <TableView fx:id="VeradoTabla" layoutX="239.0" layoutY="64.0" prefHeight="392.0" prefWidth="430.0" styleClass="tableview">
                      <columns>
                         <TableColumn fx:id="AzonositoOszlop" prefWidth="75.0" text="Azonosító" />
                         <TableColumn fx:id="NevOszlop" prefWidth="80.79998779296875" text="Nev" />
                         <TableColumn fx:id="VercsoportOszlop" prefWidth="76.79998779296875" text="Vercsoport" />
-                        <TableColumn fx:id="MennyisegOszlop" prefWidth="75.199951171875" text="Mennyiseg" />
-                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="78.39990234375" text="KorhazID" />
+                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="79.0" text="KorhazID" />
+                        <TableColumn fx:id="MennyisegOszlop" prefWidth="76.0" text="Mennyiseg" />
                      </columns>
                   </TableView>
                   <Button layoutX="125.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
-                  <TextField fx:id="VeradoKeresoField" layoutX="676.0" layoutY="42.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
+                  <TextField fx:id="VeradoKeresoField" layoutX="388.0" layoutY="23.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
                   <Button layoutX="695.0" layoutY="75.0" mnemonicParsing="false" onAction="#VeradoKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres" />
                   <Pane layoutX="675.0" layoutY="114.0" prefHeight="70.0" prefWidth="134.0" styleClass="pane">
                      <children>
@@ -72,14 +72,14 @@
                   </Pane>
                   <Pane layoutX="121.0" layoutY="36.0" prefHeight="244.0" prefWidth="91.0" styleClass="pane">
                      <children>
-                        <Text fx:id="APlusCounter" fill="WHITE" layoutX="40.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
-                        <Text fx:id="AMCounter" fill="WHITE" layoutX="40.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
-                        <Text fx:id="BPCounter" fill="WHITE" layoutX="40.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
-                        <Text fx:id="BMCounter" fill="WHITE" layoutX="40.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
-                        <Text fx:id="ABPCounter" fill="WHITE" layoutX="39.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
-                        <Text fx:id="ABMCounter" fill="WHITE" layoutX="40.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
-                        <Text fx:id="OPCounter" fill="WHITE" layoutX="40.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
-                        <Text fx:id="OMCounter" fill="WHITE" layoutX="40.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER"/>
+                        <Text fx:id="APlusCounter" fill="WHITE" layoutX="40.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="AMCounter" fill="WHITE" layoutX="40.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="BPCounter" fill="WHITE" layoutX="40.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="BMCounter" fill="WHITE" layoutX="40.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="ABPCounter" fill="WHITE" layoutX="39.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="ABMCounter" fill="WHITE" layoutX="40.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="OPCounter" fill="WHITE" layoutX="40.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="OMCounter" fill="WHITE" layoutX="40.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
                      </children>
                   </Pane>
                   <TextField fx:id="korhazHozzaField" layoutX="24.0" layoutY="402.0" prefHeight="26.0" prefWidth="185.0" promptText="Melyik_korhaz" />
