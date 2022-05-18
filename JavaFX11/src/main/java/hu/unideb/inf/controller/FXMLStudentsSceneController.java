@@ -35,8 +35,7 @@ public class FXMLStudentsSceneController implements Initializable {
     Korhaz korhaz = new Korhaz();
     static List<Korhaz> korhazLista = new ArrayList<>();
     static List<Verado> veradoLista= new ArrayList<>();
-    int MaxMennyiseg;
-    int MinMennyiseg;
+
 
 
     ////////////////////////////////////////Függvények////////////////////////////////////////
@@ -150,244 +149,129 @@ public class FXMLStudentsSceneController implements Initializable {
             String sql = "SELECT * FROM KORHAZ";
             Statement s = cn1.createStatement();
             ResultSet r = s.executeQuery(sql);
+            int nyitvatartasigora = 24;
+            int nytvigmin = 59;
+            int nyitvatartolora = 0;
+            int nytvtolmin = 0;
+    if(VeradoPontKeresoField.getText().equals("") && VeradoPontNyitvatartasMinField.getText().equals("") && VeradoPontNyitvatartasMaxField.getText().equals("")) {
+        while (i < korhazLista.size()) {
+            VeradoPontTabla.refresh();
 
-            while (i < korhazLista.size())
-            {
+            Korhaz korhazseged = korhazLista.get(i);
+
+            korhazObservableList.add(korhazseged);
+            i++;
+        }
+        VeradoPontTabla.setItems(korhazObservableList);
+    }
+    else{
+        if(!VeradoPontNyitvatartasMinField.getText().equals("")){
+            if(CheckTimeConditionFormatum(VeradoPontNyitvatartasMinField.getText())){
+                String[] split = VeradoPontNyitvatartasMinField.getText().split(":");
+                nyitvatartolora = Integer.parseInt(split[0]);
+                nytvtolmin = Integer.parseInt(split[1]);
+            }
+
+        }
+        if(!VeradoPontNyitvatartasMaxField.getText().equals("")){
+            if(CheckTimeConditionFormatum(VeradoPontNyitvatartasMaxField.getText())){
+                String[] split = VeradoPontNyitvatartasMaxField.getText().split(":");
+                nyitvatartasigora = Integer.parseInt(split[0]);
+                nytvigmin = Integer.parseInt(split[1]);
+            }
+
+        }
+        if(!VeradoPontKeresoField.getText().equals("")){
+            for (int j = 0; j < korhazLista.size(); j++){
+            if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getNev()) &&
+                    IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
+
                 VeradoPontTabla.refresh();
 
-                Korhaz korhazseged = korhazLista.get(i);
+                Korhaz korhazseged = korhazLista.get(j);
 
                 korhazObservableList.add(korhazseged);
-                i++;
+
             }
-            FilteredList<Korhaz> filterData = new FilteredList<>(korhazObservableList, b -> true);
+                if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getHelyszin()) &&
+                        IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
 
-            // 2. Set the filter Predicate whenever the filter changes.
-            VeradoPontKeresoField.textProperty().addListener((observable, oldValue, newValue) -> {
-                filterData.setPredicate(korhaz -> {
-                    // If filter text is empty, display all persons.
+                    VeradoPontTabla.refresh();
 
-                    /*if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }else {*/
+                    Korhaz korhazseged = korhazLista.get(j);
 
-                        // Compare first name and last name of every person with filter text.
-                        String lowerCaseFilter = newValue.toLowerCase();
+                    korhazObservableList.add(korhazseged);
+                }
+                else if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getId()) &&
+                        IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
 
-                        if (korhaz.getNev().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                            return true; //nev
-                        } else if (korhaz.getHelyszin().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                            return true; //vercsoport
-                        } else if (String.valueOf(korhaz.getIdo()).indexOf(lowerCaseFilter) != -1) {
-                            return true; //mennyiseg
-                        }else if (String.valueOf(korhaz.getJuttatas()).indexOf(lowerCaseFilter)!=-1){
-                            return true;
-                        }
-                        else
-                            return false; // Does not match.
-                    //}
-                });
+                    VeradoPontTabla.refresh();
+
+                    Korhaz korhazseged = korhazLista.get(j);
+
+                    korhazObservableList.add(korhazseged);
+                }
+            }
+        }
+        else if(!VeradoPontNyitvatartasMinField.getText().equals("") || !VeradoPontNyitvatartasMaxField.getText().equals("")){
+            for (int l = 0; l < korhazLista.size(); l++){
+                if(IdoConditiontol(korhazLista.get(l).getIdo(), nyitvatartolora, nytvtolmin, nyitvatartasigora,nytvigmin)){
+
+                    VeradoPontTabla.refresh();
+
+                    Korhaz korhazseged = korhazLista.get(l);
+
+                    korhazObservableList.add(korhazseged);
+                }
+            }
+        }
+
+    }
 
 
-            });
-            // 3. Wrap the FilteredList in a SortedList.
-            //SortedList<Verado> sortedData = new SortedList<>(filteredData);
-
-            // 4. Bind the SortedList comparator to the TableView comparator.
-            // 	  Otherwise, sorting the TableView would have no effect.
-            //sortedData.comparatorProperty().bind(VeradoTabla.comparatorProperty());
-
-            // 5. Add sorted (and filtered) data to the table.
-            //VeradoTabla.setItems(sortedData);
-            VeradoPontTabla.setItems(korhazObservableList);
-            //VeradoPontTabla.getItems().clear();
         }catch (Exception e){
 
         }
     }
-    public void VPUpdateTabeleView(){
-        int i = 0;
-        VeradoPontTabla.getItems().clear();
-        VeradoPontAzonositoOszlop.setCellValueFactory(new PropertyValueFactory<>("Id"));
-        VeradoPontNeveOszlop.setCellValueFactory(new PropertyValueFactory<>("helyszin"));
-        VeradoPontNyitvatartasOszlop.setCellValueFactory(new PropertyValueFactory<>("ido"));
-        VeradoPontJuttatasOszlop.setCellValueFactory(new PropertyValueFactory<>("juttatas"));
-        VeradoPontHelyeOszlop.setCellValueFactory(new PropertyValueFactory<>("nev"));
-
-            try {
-                ConnectionDB cn = new ConnectionDB();
-                Connection cn1 = cn.fileconnection();
-
-                String sql = "SELECT * FROM KORHAZ";
-                Statement s = cn1.createStatement();
-                ResultSet r = s.executeQuery(sql);
-                if(VeradoPontKeresoField.getText().equals("")) {
-                    while (i < korhazLista.size()) {
-                        VeradoPontTabla.refresh();
-
-                        Korhaz korhazseged = korhazLista.get(i);
-
-                        korhazObservableList.add(korhazseged);
-                        i++;
-                    }
-                    VeradoPontTabla.setItems(korhazObservableList);
-                }
-                else {
-                    FilteredList<Korhaz> filterData = new FilteredList<>(korhazObservableList, b -> true);
-
-                    // 2. Set the filter Predicate whenever the filter changes.
-                    VeradoPontKeresoField.textProperty().addListener((observable, oldValue, newValue) -> {
-                        filterData.setPredicate(korhaz -> {
-                            // If filter text is empty, display all persons.
-
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }else {
-
-                            // Compare first name and last name of every person with filter text.
-                            String lowerCaseFilter = newValue.toLowerCase();
-
-                            if (korhaz.getNev().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                                return true; //nev
-                            } else if (korhaz.getHelyszin().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                                return true; //vercsoport
-                            } else if (String.valueOf(korhaz.getIdo()).indexOf(lowerCaseFilter) != -1) {
-                                return true; //mennyiseg
-                            }else if (String.valueOf(korhaz.getJuttatas()).indexOf(lowerCaseFilter)!=-1){
-                                return true;
-                            }
-                            else
-                                return false; // Does not match.
-                            }
-                        });
 
 
-                    });
-                    // 3. Wrap the FilteredList in a SortedList.
-                    SortedList<Korhaz> sortedData = new SortedList<>(filterData);
 
-                    // 4. Bind the SortedList comparator to the TableView comparator.
-                    // 	  Otherwise, sorting the TableView would have no effect.
-                    sortedData.comparatorProperty().bind(VeradoPontTabla.comparatorProperty());
-
-                    // 5. Add sorted (and filtered) data to the table.
-                    VeradoPontTabla.setItems(sortedData);
-                    /*while(i<filterData.size()){
-                        VeradoPontTabla.refresh();
-                        Korhaz korhazseged2=filterData.get(i);
-                        korhazObservableList.add(korhazseged2);
-
-                    }
-                    VeradoPontTabla.setItems(korhazObservableList);*/
-                }
-            }catch (Exception e){
-
+    public Boolean IdoConditiontol(String IdoToCheck, int tolora, int tolmin, int oraig, int minig){
+        ArrayList<Integer> timelist = new ArrayList<>();
+        String[] split=IdoToCheck.split("-");
+        String[] hourminute = null;
+        for (int i = 0; i < split.length; i++){
+            hourminute = (split[i].split(":"));
+            for (int k = 0; k < hourminute.length; k++) {
+                timelist.add(Integer.parseInt(hourminute[k]));
             }
-
-
-
         }
-        /*try {
-            ConnectionDB cn = new ConnectionDB();
-            Connection cn1 = cn.fileconnection();
+        if(timelist.get(0) >= tolora && timelist.get(2) <= oraig){
+            if(timelist.get(0) == tolora){
 
-            String sql = "SELECT * FROM KORHAZ";
-            Statement s = cn1.createStatement();
-            ResultSet r = s.executeQuery(sql);
+                if(timelist.get(1) >= tolmin ){
 
-            while (i < korhazLista.size())
-            {
-                VeradoPontTabla.refresh();
-
-                Korhaz korhazseged = korhazLista.get(i);
-
-                korhazObservableList.add(korhazseged);
-                i++;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            VeradoPontTabla.setItems(korhazObservableList);
-        }catch (Exception e){
+            if(timelist.get(2) == oraig){
 
-        }*/
+                if(timelist.get(3) <= minig){
 
-
-
-
-
-
-
-    //private final ObservableList<Verado> dataList = FXCollections.observableArrayList();
-
-    public void VUpdateTabeleView(){
-        int i = 0;
-        //VeradoTabla.getItems().clear();
-        VeradoTabla.getItems().clear();
-        AzonositoOszlop.setCellValueFactory(new PropertyValueFactory<>("id"));
-        NevOszlop.setCellValueFactory(new PropertyValueFactory<>("mennyiseg"));
-        VercsoportOszlop.setCellValueFactory(new PropertyValueFactory<>("nev"));
-        MennyisegOszlop.setCellValueFactory(new PropertyValueFactory<>("vercsoport"));
-        KorhazIDOszlop.setCellValueFactory(new PropertyValueFactory<>("korhazID"));
-
-
-
-
-
-        try {
-            ConnectionDB cn = new ConnectionDB();
-            Connection cn1 = cn.fileconnection();
-
-            String sql = "SELECT * FROM VERADO";
-            Statement s = cn1.createStatement();
-            ResultSet r = s.executeQuery(sql);
-
-            while (i < veradoLista.size())
-            {
-                VeradoTabla.refresh();
-
-                Verado veradoseged = veradoLista.get(i);
-
-                veradoObservableList.add(veradoseged);
-                i++;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            //VeradoTabla.setItems(veradoObservableList);
-            FilteredList<Verado> filteredData = new FilteredList<>(veradoObservableList, b -> true);
-
-            // 2. Set the filter Predicate whenever the filter changes.
-            VeradoKeresoField.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredData.setPredicate(verado -> {
-                    // If filter text is empty, display all persons.
-
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }else {
-
-                        // Compare first name and last name of every person with filter text.
-                        String lowerCaseFilter = newValue.toLowerCase();
-
-                        if (verado.getNev().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                            return true; //nev
-                        } else if (verado.getVercsoport().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                            return true; //vercsoport
-                        } else if (String.valueOf(verado.getMennyiseg()).indexOf(lowerCaseFilter) != -1)
-                            return true; //mennyiseg
-                        else
-                            return false; // Does not match.
-                    }
-                });
-
-
-            });
-
-            SetBloodCounters();
-
-            //veradoObservableList.add((Verado) veradoObservableList);
-            VeradoTabla.setItems(veradoObservableList);
-
-        }catch (Exception e){
-
+            return true;
         }
-
-
-
+        return false;
     }
 
     public void VUpdateTableView(){
@@ -410,59 +294,87 @@ public class FXMLStudentsSceneController implements Initializable {
             String sql = "SELECT * FROM VERADO";
             Statement s = cn1.createStatement();
             ResultSet r = s.executeQuery(sql);
+            if(VeradoKeresoField.getText().equals("")){
 
-            while (i < veradoLista.size())
-            {
-                VeradoTabla.refresh();
 
-                Verado veradoseged = veradoLista.get(i);
+                while (i < veradoLista.size()) {
+                    VeradoTabla.refresh();
 
-                veradoObservableList.add(veradoseged);
-                i++;
+                    Verado veradoseged = veradoLista.get(i);
+
+                    veradoObservableList.add(veradoseged);
+                    i++;
+                }
             }
-            //VeradoTabla.setItems(veradoObservableList);
-            FilteredList<Verado> filteredData = new FilteredList<>(veradoObservableList, b -> true);
+            else
+            {
+                veradoObservableList.clear();
+                Boolean talalat = false;
+                for (int j = 0; j < veradoLista.size(); j++) {
+                    if (VeradoKeresoField.getText().equals(veradoLista.get(j).getId())) {
 
-            // 2. Set the filter Predicate whenever the filter changes.
-            VeradoKeresoField.textProperty().addListener((observable, oldValue, newValue) -> {
-                filteredData.setPredicate(verado -> {
-                    // If filter text is empty, display all persons.
+                        VeradoTabla.refresh();
 
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }else {
+                        Verado veradoseged = veradoLista.get(j);
 
-                        // Compare first name and last name of every person with filter text.
-                        String lowerCaseFilter = newValue.toLowerCase();
-
-                        if (verado.getNev().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                            return true; //nev
-                        } else if (verado.getVercsoport().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                            return true; //vercsoport
-                        } else if (String.valueOf(verado.getMennyiseg()).indexOf(lowerCaseFilter) != -1)
-                            return true; //mennyiseg
-                        else
-                            return false; // Does not match.
+                        veradoObservableList.add(veradoseged);
+                        talalat = true;
                     }
-                });
+
+                    if (VeradoKeresoField.getText().equals(veradoLista.get(j).getNev())) {
+
+                        VeradoTabla.refresh();
+
+                        Verado veradoseged = veradoLista.get(j);
+
+                        veradoObservableList.add(veradoseged);
+                        talalat = true;
+                    } else if (VeradoKeresoField.getText().equals(veradoLista.get(j).getMennyiseg())) {
+
+                        VeradoTabla.refresh();
+
+                        Verado veradoseged = veradoLista.get(j);
+
+                        veradoObservableList.add(veradoseged);
+                        talalat = true;
+                    } else if (VeradoKeresoField.getText().equals(veradoLista.get(j).getVercsoport())) {
+
+                        VeradoTabla.refresh();
+
+                        Verado veradoseged = veradoLista.get(j);
+
+                        veradoObservableList.add(veradoseged);
+                    talalat = true;
+                    }
+                }
+                if(talalat == false) {
+                    int korhazdid = 0;
+                    for (int k = 0; k < korhazLista.size(); k++) {
+                        if (VeradoKeresoField.getText().equals(korhazLista.get(k).getNev())) {
+                           korhazdid =korhazLista.get(k).getId();
+                            break;
+                        }
+                    }
+                    for (int l = 0; l < veradoLista.size(); l++) {
+                        if(veradoLista.get(l).getKorhazID() == korhazdid) {
+                            VeradoTabla.refresh();
+
+                            Verado veradoseged = veradoLista.get(l);
+
+                            veradoObservableList.add(veradoseged);
+                        }
+                    }
+                }
+                        }
 
 
-            });
-            // 3. Wrap the FilteredList in a SortedList.
-            //SortedList<Verado> sortedData = new SortedList<>(filteredData);
 
-            // 4. Bind the SortedList comparator to the TableView comparator.
-            // 	  Otherwise, sorting the TableView would have no effect.
-            //sortedData.comparatorProperty().bind(VeradoTabla.comparatorProperty());
 
-            // 5. Add sorted (and filtered) data to the table.
-            //VeradoTabla.setItems(sortedData);
             SetBloodCounters();
             VeradoTabla.setItems(veradoObservableList);
         }catch (Exception e){
 
         }
-
 
 
     }
@@ -495,6 +407,118 @@ public class FXMLStudentsSceneController implements Initializable {
             ABMCounter.setText(String.valueOf(ABM));
             OPCounter.setText(String.valueOf(OP));
             OMCounter.setText(String.valueOf(OM));
+
+    }
+
+    public boolean CheckTimeFormatum(String s){
+
+        if(s.length()==11) {
+            if (s.charAt(2) == ':' && s.charAt(5) == '-' && s.charAt(8) == ':') {
+                ArrayList<String> timelist = new ArrayList<>();
+                String[] split=s.split("-");
+                String[] hourminute = null;
+                for (int i = 0; i < split.length; i++){
+                  hourminute = (split[i].split(":"));
+                  for (int k = 0; k < hourminute.length; k++) {
+                      timelist.add(hourminute[k]);
+                  }
+                }
+
+
+                for (int i = 0; i < timelist.size(); i++){
+                    if (CheckIfConChar(timelist.get(i))){
+                        WarningPopUpWindow("Hibás nyitvatartás formátum!(ÓÓ:mm-ÓÓ:mm)");
+                        return false;
+
+                    }
+                    else {
+                        for (int j = 0; j < timelist.size(); j++) {
+
+                        }
+                        int MinOra = Integer.parseInt(timelist.get(0));
+                        int MinPerc = Integer.parseInt(timelist.get(1));
+                        int MaxOra = Integer.parseInt(timelist.get(2));
+                        int MaxPerc = Integer.parseInt(timelist.get(3));
+                        if ((MinOra >= 0 && MinOra <= 24 && MinPerc >= 0 && MinPerc < 60) && (MaxOra >= 0 && MaxOra <= 24 && MaxPerc >= 0 && MaxPerc < 60)) {
+                            if (MinOra < MaxOra) {
+
+                                return true;
+
+
+                            } else {
+                                WarningPopUpWindow("Hibás nyitvatartás formátum!A nyitás nem lehet nagyobb mint a zárás!");
+                                return false;
+                            }
+                        } else {
+                            WarningPopUpWindow("Hibás nyitvatartás formátum!");
+
+                            return false;
+                        }
+                    }
+
+                }
+
+
+            }
+            else{
+                WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
+                return false;
+            }
+        }else{
+            WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
+            return false;
+        }
+        return false;
+
+    }
+    public boolean CheckTimeConditionFormatum(String s){
+
+        if(s.length()==5) {
+            if (s.charAt(2) == ':') {
+
+                String[] split = s.split(":");
+                String ora = split[0];
+                String perc = split[1];
+
+
+                if (CheckIfConChar(ora)) {
+                    WarningPopUpWindow("Hibás nyitvatartás formátum!(ÓÓ:mm-ÓÓ:mm)");
+                    return false;
+
+                } else if (CheckIfConChar(perc)) {
+                    WarningPopUpWindow("Hibás nyitvatartás formátum!(ÓÓ:mm-ÓÓ:mm)");
+                    return false;
+
+                } else {
+
+                    int MinOra = Integer.parseInt(ora);
+                    int MinPerc = Integer.parseInt(perc);
+
+                    if (MinOra >= 0 && MinOra <= 24 && MinPerc >= 0 && MinPerc < 60) {
+
+
+                        return true;
+
+
+                    } else {
+                        WarningPopUpWindow("Hibás nyitvatartás formátum!");
+
+                        return false;
+                    }
+                }
+
+
+            }
+            else{
+                WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
+                return false;
+            }
+        }
+        else{
+            WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
+            return false;
+        }
+
 
     }
     ////////////////////////////////////////FÜGGVÉNYEK VÉGE////////////////////////////////////////
@@ -554,7 +578,8 @@ public class FXMLStudentsSceneController implements Initializable {
 
         Boolean mezoures = false;
         Boolean vercsoportcontain = false;
-
+        Boolean vermennyiseg = false;
+        Boolean korhazletezik = false;
 
         if(VeradoMennyisegField.getText().equals("") ||
                 VeradoNevField.getText().equals("") ||
@@ -570,7 +595,12 @@ public class FXMLStudentsSceneController implements Initializable {
                 WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
 
             }
-
+            if(Integer.parseInt(VeradoMennyisegField.getText()) > 500 || Integer.parseInt(VeradoMennyisegField.getText()) < 450){
+                WarningPopUpWindow("Hiba! A mennyiség 450 és 500 ml között legyen.");
+            }
+            else{
+                vermennyiseg = true;
+            }
             for (int i = 0; i < VercsoportTomb.length; i++) {
                 if (VercsoportTomb[i].equals(VeradoVercsoportField.getText())) {
                     vercsoportcontain = true;
@@ -590,12 +620,26 @@ public class FXMLStudentsSceneController implements Initializable {
                 }
 
             }
+            for (int b= 0; b < korhazLista.size(); b++)
+            {
+
+                if(korhazHozzaField.getText().equals(korhazLista.get(b).getNev()))
+                {
+                   korhazletezik = true;
+
+                }
+
+            }
+            if(korhazletezik == false){
+                WarningPopUpWindow("Nincs ilyen korház az adatbázisban!");
+            }
         }
 
-        if (CheckIfConChar(VeradoMennyisegField.getText()) == false &&
+        if (vermennyiseg == true &&
                 mezoures == false &&
                 vercsoportcontain == true &&
-                CheckIfConNumb(VeradoNevField.getText()) == false) {
+                CheckIfConNumb(VeradoNevField.getText()) == false &&
+                korhazletezik == true) {
 
             Verado s = new Verado();
             s.setNev(VeradoNevField.getText());
@@ -621,7 +665,7 @@ public class FXMLStudentsSceneController implements Initializable {
                 VUpdateTableView();
             }
             else{
-                VUpdateTabeleView();
+                VUpdateTableView();
             }
         }
 
@@ -630,35 +674,8 @@ public class FXMLStudentsSceneController implements Initializable {
 
     @FXML
     void VeradoKeresButtonPushed(ActionEvent event) {
-        if(!VeradoMennyisegMin.getText().equals("") && !VeradoMennyisegMax.getText().equals("")) {
-            if (CheckIfConChar(VeradoMennyisegMin.getText()) || CheckIfConChar(VeradoMennyisegMax.getText())) {
-                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-            }
-            else
-            {
-                MaxMennyiseg = Integer.parseInt(VeradoMennyisegMax.getText());
-                MinMennyiseg = Integer.parseInt(VeradoMennyisegMin.getText());
-            }
-        }
-        else if(VeradoMennyisegMin.getText().equals("") && !VeradoMennyisegMax.getText().equals("")) {
-            if (CheckIfConChar(VeradoMennyisegMax.getText())) {
-                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-            }
-            else
-            {
-             MaxMennyiseg = Integer.parseInt(VeradoMennyisegMax.getText());
-            }
-        }
-        else if(!VeradoMennyisegMin.getText().equals("") && VeradoMennyisegMax.getText().equals("")) {
-            if (CheckIfConChar(VeradoMennyisegMin.getText()) || CheckIfConChar(VeradoMennyisegMax.getText())) {
-                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-            }
-            else{
-                MinMennyiseg = Integer.parseInt(VeradoMennyisegMin.getText());
-            }
-        }
 
-
+        VUpdateTableView();
 
         }
 
@@ -685,7 +702,7 @@ public class FXMLStudentsSceneController implements Initializable {
         }
 
 
-        VUpdateTabeleView();
+        VUpdateTableView();
     }
 
     @FXML
@@ -696,6 +713,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
         Boolean mezoures = false;
         Boolean vercsoportcontain = false;
+        Boolean vermennyiseg = false;
 
         if(VeradoMennyisegFieldUpdate1.getText().equals("") ||
                 VeradoNevFieldUpdate1.getText().equals("") ||
@@ -710,7 +728,12 @@ public class FXMLStudentsSceneController implements Initializable {
                 WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
 
             }
-
+            if(Integer.parseInt(VeradoMennyisegField.getText()) > 500 || Integer.parseInt(VeradoMennyisegField.getText()) < 450){
+                WarningPopUpWindow("Hiba! A mennyiség 450 és 500 ml között legyen.");
+            }
+            else{
+                vermennyiseg = true;
+            }
             for (int i = 0; i < VercsoportTomb.length; i++) {
                 if (VercsoportTomb[i].equals(VeradoVercsoportFieldUpdate1.getText())) {
                     vercsoportcontain = true;
@@ -734,7 +757,8 @@ public class FXMLStudentsSceneController implements Initializable {
         if (CheckIfConChar(VeradoMennyisegFieldUpdate1.getText()) == false &&
                 mezoures == false &&
                 vercsoportcontain == true &&
-                CheckIfConNumb(VeradoNevFieldUpdate1.getText()) == false) {
+                CheckIfConNumb(VeradoNevFieldUpdate1.getText()) == false &&
+                vermennyiseg == true) {
 
             ConnectionDB ucn = new ConnectionDB();
             Connection ucn1 = ucn.fileconnection();
@@ -742,7 +766,7 @@ public class FXMLStudentsSceneController implements Initializable {
             allUpdateVerado = VeradoTabla.getItems();
 
             singleUpdateVerado = VeradoTabla.getSelectionModel().getSelectedItems();
-            //singleUpdateVerado.forEach(allUpdateVerado::set);
+
             String segedID = "";
             int ID = VeradoTabla.getSelectionModel().getSelectedItem().getId();
             for (int i = 0; i < korhazLista.size(); i++) {
@@ -761,7 +785,7 @@ public class FXMLStudentsSceneController implements Initializable {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            VUpdateTabeleView();
+            VUpdateTableView();
 
 
         }
@@ -770,46 +794,7 @@ public class FXMLStudentsSceneController implements Initializable {
 //VERADO BUTTONOK VEGE
 
 
-    //VERCSOPORT BOOLEAN
-    @FXML
-    void SetVercsoportABMinusz(ActionEvent event) {
 
-    }
-
-    @FXML
-    void SetVercsoportABPlusz(ActionEvent event) {
-
-    }
-
-    @FXML
-    void SetVercsoportAMinusz(ActionEvent event) {
-
-    }
-
-    @FXML
-    void SetVercsoportAPlusz(ActionEvent event) {
-
-    }
-
-    @FXML
-    void SetVercsoportBMinusz(ActionEvent event) {
-
-    }
-
-    @FXML
-    void SetVercsoportBPlusz(ActionEvent event) {
-
-    }
-
-    @FXML
-    void SetVercsoportOMinusz(ActionEvent event) {
-
-    }
-
-    @FXML
-    void SetVercsoportOPlusz(ActionEvent event) {
-
-    }
 
 //VERCSOPORT BOOLEAN VEGE
 
@@ -947,6 +932,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
         Boolean mezoureskorhaz = false;
         Boolean nyitv = false;
+        Boolean juttatasformat = false;
         Boolean juttatascheck = false;
         if(VeradoPontNeveField.getText().equals("")||
             VeradoPontJuttatasField.getText().equals("")||
@@ -958,41 +944,30 @@ public class FXMLStudentsSceneController implements Initializable {
 
         }
         else{
-            /*if(VeradoPontJuttatasField.getText()!="true"&&VeradoPontJuttatasField.getText()!="false"){
-                WarningPopUpWindow("Kérlek true vagy false értéket adj meg juttatásnak!");
-                juttatascheck=true;
-            }*/
 
-            String[] split=VeradoPontNyitvatartasField.getText().split(":");
-            if(VeradoPontNyitvatartasField.getText().length()==11) {
-                if (VeradoPontNyitvatartasField.getText().charAt(2) == ':' && VeradoPontNyitvatartasField.getText().charAt(5) == '-' && VeradoPontNyitvatartasField.getText().charAt(8) == ':') {
-                    nyitv = true;
-                }
-                else{
-                    WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
-                }
-            }else{
-                WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
-            }
+          nyitv = CheckTimeFormatum(VeradoPontNyitvatartasField.getText());
 
         }
-        if(mezoureskorhaz==false&&nyitv==true) {
-
-            if (!VeradoPontJuttatasField.getText().equals("")) {
-
-                if (VeradoPontJuttatasField.getText().equals("true")) {
-                    seged = true;
-                } else if (VeradoPontJuttatasField.getText().equals("false")) {
-                    seged = false;
+        if (!VeradoPontJuttatasField.getText().equals("")) {
+            if (VeradoPontJuttatasField.getText().equals("VAN") || VeradoPontJuttatasField.getText().equals("NINCS")) {
+                if (VeradoPontJuttatasField.getText().equals("VAN")) {
+                    juttatascheck = true;
+                } else {
+                    juttatascheck = false;
                 }
-
-                korhaz.setJuttatas(seged);
+                juttatasformat = true;
+            } else {
+                WarningPopUpWindow("Hibás juttatás formátum!(VAN vagy NINCS)");
             }
+        }
+
+        if(mezoureskorhaz==false&&nyitv==true && juttatasformat == true) {
+
 
             Korhaz korhaz = new Korhaz();
             korhaz.setNev(VeradoPontNeveField.getText());
             korhaz.setIdo(VeradoPontNyitvatartasField.getText());
-            korhaz.setJuttatas(seged);
+            korhaz.setJuttatas(juttatascheck);
             korhaz.setHelyszin(VeradoPontHelyField.getText());
 
             korhazLista.add(korhaz);
@@ -1011,7 +986,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
     @FXML
     void VeradoPontKeresButtonPushed(ActionEvent event) {
-
+    VPUpdateTableView();
     }
 
     @FXML
@@ -1043,6 +1018,7 @@ public class FXMLStudentsSceneController implements Initializable {
         Boolean mezoureskorhaz = false;
         Boolean nyitv = false;
         Boolean juttatascheck = false;
+        Boolean juttatasformat = false;
         if(VeradoPontNeveFieldUpdate1.getText().equals("")||
                 VeradoPontJuttatasFieldUpdate1.getText().equals("")||
                 VeradoPontNyitvatartasFieldUpdate1.getText().equals("")||
@@ -1053,25 +1029,22 @@ public class FXMLStudentsSceneController implements Initializable {
 
         }
         else{
-            /*if(VeradoPontJuttatasField.getText()!="true"&&VeradoPontJuttatasField.getText()!="false"){
-                WarningPopUpWindow("Kérlek true vagy false értéket adj meg juttatásnak!");
-                juttatascheck=true;
-            }*/
-
-            String[] split=VeradoPontNyitvatartasFieldUpdate1.getText().split(":");
-            if(VeradoPontNyitvatartasFieldUpdate1.getText().length()==11) {
-                if (VeradoPontNyitvatartasFieldUpdate1.getText().charAt(2) == ':' && VeradoPontNyitvatartasFieldUpdate1.getText().charAt(5) == '-' && VeradoPontNyitvatartasFieldUpdate1.getText().charAt(8) == ':') {
-                    nyitv = true;
+            if (!VeradoPontJuttatasFieldUpdate1.getText().equals("")) {
+                if (VeradoPontJuttatasFieldUpdate1.getText().equals("VAN") || VeradoPontJuttatasFieldUpdate1.getText().equals("NINCS")) {
+                    if (VeradoPontJuttatasFieldUpdate1.getText().equals("VAN")) {
+                        juttatascheck = true;
+                    } else {
+                        juttatascheck = false;
+                    }
+                    juttatasformat = true;
+                } else {
+                    WarningPopUpWindow("Hibás juttatás formátum!(VAN vagy NINCS)");
                 }
-                else{
-                    WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
-                }
-            }else{
-                WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
             }
 
+           nyitv = CheckTimeFormatum(VeradoPontNyitvatartasFieldUpdate1.getText());
         }
-        if(mezoureskorhaz==false&&nyitv==true) {
+        if(mezoureskorhaz==false&&nyitv==true && juttatasformat == true) {
 
 
             ConnectionDB ucn = new ConnectionDB();
@@ -1106,7 +1079,7 @@ public class FXMLStudentsSceneController implements Initializable {
             e.printStackTrace();
         }
 
-        VUpdateTabeleView();
+        VUpdateTableView();
 
         try {
             korhazLista = GetKorhaz();
