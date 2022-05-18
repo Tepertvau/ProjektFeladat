@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -12,6 +13,15 @@
 
 <TabPane prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.FXMLStudentsSceneController">
    <tabs>
+      <Tab text="Főoldal">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="AnchorPane" stylesheets="@styles.css">
+               <children>
+                  <TextArea layoutX="234.0" layoutY="128.0" prefHeight="218.0" prefWidth="438.0" promptText="A legalapvetőbb tudnivalókVéradásra jelentkezhet minden 18 és 65 év közötti egészséges felnőtt ember, a férfiak pedig akár 5-ször, nők maximum 3-szor adhatnak vért egy évben. Két teljes véradás között legkevesebb 56 napnak kell eltelnie. Minden véradást orvosi vizsgálat előz meg, a véradásra való alkalmasságot jelenleg Magyarországon mindig orvos dönti el, a leendő véradó részletes kikérdezése - korábbi és jelenlegi betegségeiről, egészségi állapotáról -, és fizikális vizsgálata után. Az orvosi vizsgálat vérnyomásmérésből, a szív és a tüdő meghallgatásából, a nyaki nyirokcsomók tapintásából, a látható nyálkahártyák megtekintéséből áll. Megnézik vér hemoglobin (vérfesték) koncentrációját is (első véradóknál az előzetes vércsoport-meghatározás megtörténik). Ha a vizsgálat során eltérést találnak, akkor időlegesen vagy véglegesen kizárják a donort a véradásból." />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
       <Tab text="Véradás">
          <content>
             <AnchorPane prefHeight="554.0" prefWidth="906.0" styleClass="AnchorPane">
