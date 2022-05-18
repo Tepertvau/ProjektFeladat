@@ -10,8 +10,5 @@
         <module name="Valami" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="JavaFX11" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
