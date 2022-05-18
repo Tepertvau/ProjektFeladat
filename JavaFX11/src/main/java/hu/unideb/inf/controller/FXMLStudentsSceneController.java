@@ -35,8 +35,7 @@ public class FXMLStudentsSceneController implements Initializable {
     Korhaz korhaz = new Korhaz();
     static List<Korhaz> korhazLista = new ArrayList<>();
     static List<Verado> veradoLista= new ArrayList<>();
-    int MaxMennyiseg;
-    int MinMennyiseg;
+
 
 
     ////////////////////////////////////////Függvények////////////////////////////////////////
@@ -150,18 +149,85 @@ public class FXMLStudentsSceneController implements Initializable {
             String sql = "SELECT * FROM KORHAZ";
             Statement s = cn1.createStatement();
             ResultSet r = s.executeQuery(sql);
+            int nyitvatartasigora = 24;
+            int nytvigmin = 59;
+            int nyitvatartolora = 0;
+            int nytvtolmin = 0;
+    if(VeradoPontKeresoField.getText().equals("") && VeradoPontNyitvatartasMinField.getText().equals("") && VeradoPontNyitvatartasMaxField.getText().equals("")) {
+        while (i < korhazLista.size()) {
+            VeradoPontTabla.refresh();
 
-            while (i < korhazLista.size())
-            {
-                VeradoPontTabla.refresh();
+            Korhaz korhazseged = korhazLista.get(i);
 
-                Korhaz korhazseged = korhazLista.get(i);
-
-                korhazObservableList.add(korhazseged);
-                i++;
+            korhazObservableList.add(korhazseged);
+            i++;
+        }
+        VeradoPontTabla.setItems(korhazObservableList);
+    }
+    else{
+        if(!VeradoPontNyitvatartasMinField.getText().equals("")){
+            if(CheckTimeConditionFormatum(VeradoPontNyitvatartasMinField.getText())){
+                String[] split = VeradoPontNyitvatartasMinField.getText().split(":");
+                nyitvatartolora = Integer.parseInt(split[0]);
+                nytvtolmin = Integer.parseInt(split[1]);
             }
 
-            VeradoPontTabla.setItems(korhazObservableList);
+        }
+        if(!VeradoPontNyitvatartasMaxField.getText().equals("")){
+            if(CheckTimeConditionFormatum(VeradoPontNyitvatartasMaxField.getText())){
+                String[] split = VeradoPontNyitvatartasMaxField.getText().split(":");
+                nyitvatartasigora = Integer.parseInt(split[0]);
+                nytvigmin = Integer.parseInt(split[1]);
+            }
+
+        }
+        if(!VeradoPontKeresoField.getText().equals("")){
+            for (int j = 0; j < korhazLista.size(); j++){
+            if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getNev()) &&
+                    IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
+
+                VeradoPontTabla.refresh();
+
+                Korhaz korhazseged = korhazLista.get(j);
+
+                korhazObservableList.add(korhazseged);
+
+            }
+                if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getHelyszin()) &&
+                        IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
+
+                    VeradoPontTabla.refresh();
+
+                    Korhaz korhazseged = korhazLista.get(j);
+
+                    korhazObservableList.add(korhazseged);
+                }
+                else if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getId()) &&
+                        IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
+
+                    VeradoPontTabla.refresh();
+
+                    Korhaz korhazseged = korhazLista.get(j);
+
+                    korhazObservableList.add(korhazseged);
+                }
+            }
+        }
+        else if(!VeradoPontNyitvatartasMinField.getText().equals("") || !VeradoPontNyitvatartasMaxField.getText().equals("")){
+            for (int l = 0; l < korhazLista.size(); l++){
+                if(IdoConditiontol(korhazLista.get(l).getIdo(), nyitvatartolora, nytvtolmin, nyitvatartasigora,nytvigmin)){
+
+                    VeradoPontTabla.refresh();
+
+                    Korhaz korhazseged = korhazLista.get(l);
+
+                    korhazObservableList.add(korhazseged);
+                }
+            }
+        }
+
+    }
+
 
         }catch (Exception e){
 
@@ -170,7 +236,43 @@ public class FXMLStudentsSceneController implements Initializable {
 
 
 
+    public Boolean IdoConditiontol(String IdoToCheck, int tolora, int tolmin, int oraig, int minig){
+        ArrayList<Integer> timelist = new ArrayList<>();
+        String[] split=IdoToCheck.split("-");
+        String[] hourminute = null;
+        for (int i = 0; i < split.length; i++){
+            hourminute = (split[i].split(":"));
+            for (int k = 0; k < hourminute.length; k++) {
+                timelist.add(Integer.parseInt(hourminute[k]));
+            }
+        }
+        if(timelist.get(0) >= tolora && timelist.get(2) <= oraig){
+            if(timelist.get(0) == tolora){
 
+                if(timelist.get(1) >= tolmin ){
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            if(timelist.get(2) == oraig){
+
+                if(timelist.get(3) <= minig){
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
 
     public void VUpdateTableView(){
         int i = 0;
@@ -192,16 +294,80 @@ public class FXMLStudentsSceneController implements Initializable {
             String sql = "SELECT * FROM VERADO";
             Statement s = cn1.createStatement();
             ResultSet r = s.executeQuery(sql);
+            if(VeradoKeresoField.getText().equals("")){
 
-            while (i < veradoLista.size())
-            {
-                VeradoTabla.refresh();
 
-                Verado veradoseged = veradoLista.get(i);
+                while (i < veradoLista.size()) {
+                    VeradoTabla.refresh();
 
-                veradoObservableList.add(veradoseged);
-                i++;
+                    Verado veradoseged = veradoLista.get(i);
+
+                    veradoObservableList.add(veradoseged);
+                    i++;
+                }
             }
+            else
+            {
+                veradoObservableList.clear();
+                Boolean talalat = false;
+                for (int j = 0; j < veradoLista.size(); j++) {
+                    if (VeradoKeresoField.getText().equals(veradoLista.get(j).getId())) {
+
+                        VeradoTabla.refresh();
+
+                        Verado veradoseged = veradoLista.get(j);
+
+                        veradoObservableList.add(veradoseged);
+                        talalat = true;
+                    }
+
+                    if (VeradoKeresoField.getText().equals(veradoLista.get(j).getNev())) {
+
+                        VeradoTabla.refresh();
+
+                        Verado veradoseged = veradoLista.get(j);
+
+                        veradoObservableList.add(veradoseged);
+                        talalat = true;
+                    } else if (VeradoKeresoField.getText().equals(veradoLista.get(j).getMennyiseg())) {
+
+                        VeradoTabla.refresh();
+
+                        Verado veradoseged = veradoLista.get(j);
+
+                        veradoObservableList.add(veradoseged);
+                        talalat = true;
+                    } else if (VeradoKeresoField.getText().equals(veradoLista.get(j).getVercsoport())) {
+
+                        VeradoTabla.refresh();
+
+                        Verado veradoseged = veradoLista.get(j);
+
+                        veradoObservableList.add(veradoseged);
+                    talalat = true;
+                    }
+                }
+                if(talalat == false) {
+                    int korhazdid = 0;
+                    for (int k = 0; k < korhazLista.size(); k++) {
+                        if (VeradoKeresoField.getText().equals(korhazLista.get(k).getNev())) {
+                           korhazdid =korhazLista.get(k).getId();
+                            break;
+                        }
+                    }
+                    for (int l = 0; l < veradoLista.size(); l++) {
+                        if(veradoLista.get(l).getKorhazID() == korhazdid) {
+                            VeradoTabla.refresh();
+
+                            Verado veradoseged = veradoLista.get(l);
+
+                            veradoObservableList.add(veradoseged);
+                        }
+                    }
+                }
+                        }
+
+
 
 
             SetBloodCounters();
@@ -273,7 +439,7 @@ public class FXMLStudentsSceneController implements Initializable {
                         int MinPerc = Integer.parseInt(timelist.get(1));
                         int MaxOra = Integer.parseInt(timelist.get(2));
                         int MaxPerc = Integer.parseInt(timelist.get(3));
-                        if ((MinOra >= 0 && MinOra <= 24 && MinPerc >= 0 && MinPerc <= 60) && (MaxOra >= 0 && MaxOra <= 24 && MaxPerc >= 0 && MaxPerc <= 60)) {
+                        if ((MinOra >= 0 && MinOra <= 24 && MinPerc >= 0 && MinPerc < 60) && (MaxOra >= 0 && MaxOra <= 24 && MaxPerc >= 0 && MaxPerc < 60)) {
                             if (MinOra < MaxOra) {
 
                                 return true;
@@ -303,6 +469,56 @@ public class FXMLStudentsSceneController implements Initializable {
             return false;
         }
         return false;
+
+    }
+    public boolean CheckTimeConditionFormatum(String s){
+
+        if(s.length()==5) {
+            if (s.charAt(2) == ':') {
+
+                String[] split = s.split(":");
+                String ora = split[0];
+                String perc = split[1];
+
+
+                if (CheckIfConChar(ora)) {
+                    WarningPopUpWindow("Hibás nyitvatartás formátum!(ÓÓ:mm-ÓÓ:mm)");
+                    return false;
+
+                } else if (CheckIfConChar(perc)) {
+                    WarningPopUpWindow("Hibás nyitvatartás formátum!(ÓÓ:mm-ÓÓ:mm)");
+                    return false;
+
+                } else {
+
+                    int MinOra = Integer.parseInt(ora);
+                    int MinPerc = Integer.parseInt(perc);
+
+                    if (MinOra >= 0 && MinOra <= 24 && MinPerc >= 0 && MinPerc < 60) {
+
+
+                        return true;
+
+
+                    } else {
+                        WarningPopUpWindow("Hibás nyitvatartás formátum!");
+
+                        return false;
+                    }
+                }
+
+
+            }
+            else{
+                WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
+                return false;
+            }
+        }
+        else{
+            WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
+            return false;
+        }
+
 
     }
     ////////////////////////////////////////FÜGGVÉNYEK VÉGE////////////////////////////////////////
@@ -362,7 +578,8 @@ public class FXMLStudentsSceneController implements Initializable {
 
         Boolean mezoures = false;
         Boolean vercsoportcontain = false;
-
+        Boolean vermennyiseg = false;
+        Boolean korhazletezik = false;
 
         if(VeradoMennyisegField.getText().equals("") ||
                 VeradoNevField.getText().equals("") ||
@@ -378,7 +595,12 @@ public class FXMLStudentsSceneController implements Initializable {
                 WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
 
             }
-
+            if(Integer.parseInt(VeradoMennyisegField.getText()) > 500 || Integer.parseInt(VeradoMennyisegField.getText()) < 450){
+                WarningPopUpWindow("Hiba! A mennyiség 450 és 500 ml között legyen.");
+            }
+            else{
+                vermennyiseg = true;
+            }
             for (int i = 0; i < VercsoportTomb.length; i++) {
                 if (VercsoportTomb[i].equals(VeradoVercsoportField.getText())) {
                     vercsoportcontain = true;
@@ -398,12 +620,26 @@ public class FXMLStudentsSceneController implements Initializable {
                 }
 
             }
+            for (int b= 0; b < korhazLista.size(); b++)
+            {
+
+                if(korhazHozzaField.getText().equals(korhazLista.get(b).getNev()))
+                {
+                   korhazletezik = true;
+
+                }
+
+            }
+            if(korhazletezik == false){
+                WarningPopUpWindow("Nincs ilyen korház az adatbázisban!");
+            }
         }
 
-        if (CheckIfConChar(VeradoMennyisegField.getText()) == false &&
+        if (vermennyiseg == true &&
                 mezoures == false &&
                 vercsoportcontain == true &&
-                CheckIfConNumb(VeradoNevField.getText()) == false) {
+                CheckIfConNumb(VeradoNevField.getText()) == false &&
+                korhazletezik == true) {
 
             Verado s = new Verado();
             s.setNev(VeradoNevField.getText());
@@ -438,35 +674,8 @@ public class FXMLStudentsSceneController implements Initializable {
 
     @FXML
     void VeradoKeresButtonPushed(ActionEvent event) {
-        if(!VeradoMennyisegMin.getText().equals("") && !VeradoMennyisegMax.getText().equals("")) {
-            if (CheckIfConChar(VeradoMennyisegMin.getText()) || CheckIfConChar(VeradoMennyisegMax.getText())) {
-                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-            }
-            else
-            {
-                MaxMennyiseg = Integer.parseInt(VeradoMennyisegMax.getText());
-                MinMennyiseg = Integer.parseInt(VeradoMennyisegMin.getText());
-            }
-        }
-        else if(VeradoMennyisegMin.getText().equals("") && !VeradoMennyisegMax.getText().equals("")) {
-            if (CheckIfConChar(VeradoMennyisegMax.getText())) {
-                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-            }
-            else
-            {
-             MaxMennyiseg = Integer.parseInt(VeradoMennyisegMax.getText());
-            }
-        }
-        else if(!VeradoMennyisegMin.getText().equals("") && VeradoMennyisegMax.getText().equals("")) {
-            if (CheckIfConChar(VeradoMennyisegMin.getText()) || CheckIfConChar(VeradoMennyisegMax.getText())) {
-                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
-            }
-            else{
-                MinMennyiseg = Integer.parseInt(VeradoMennyisegMin.getText());
-            }
-        }
 
-
+        VUpdateTableView();
 
         }
 
@@ -504,6 +713,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
         Boolean mezoures = false;
         Boolean vercsoportcontain = false;
+        Boolean vermennyiseg = false;
 
         if(VeradoMennyisegFieldUpdate1.getText().equals("") ||
                 VeradoNevFieldUpdate1.getText().equals("") ||
@@ -518,7 +728,12 @@ public class FXMLStudentsSceneController implements Initializable {
                 WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
 
             }
-
+            if(Integer.parseInt(VeradoMennyisegField.getText()) > 500 || Integer.parseInt(VeradoMennyisegField.getText()) < 450){
+                WarningPopUpWindow("Hiba! A mennyiség 450 és 500 ml között legyen.");
+            }
+            else{
+                vermennyiseg = true;
+            }
             for (int i = 0; i < VercsoportTomb.length; i++) {
                 if (VercsoportTomb[i].equals(VeradoVercsoportFieldUpdate1.getText())) {
                     vercsoportcontain = true;
@@ -542,7 +757,8 @@ public class FXMLStudentsSceneController implements Initializable {
         if (CheckIfConChar(VeradoMennyisegFieldUpdate1.getText()) == false &&
                 mezoures == false &&
                 vercsoportcontain == true &&
-                CheckIfConNumb(VeradoNevFieldUpdate1.getText()) == false) {
+                CheckIfConNumb(VeradoNevFieldUpdate1.getText()) == false &&
+                vermennyiseg == true) {
 
             ConnectionDB ucn = new ConnectionDB();
             Connection ucn1 = ucn.fileconnection();
@@ -550,7 +766,7 @@ public class FXMLStudentsSceneController implements Initializable {
             allUpdateVerado = VeradoTabla.getItems();
 
             singleUpdateVerado = VeradoTabla.getSelectionModel().getSelectedItems();
-            //singleUpdateVerado.forEach(allUpdateVerado::set);
+
             String segedID = "";
             int ID = VeradoTabla.getSelectionModel().getSelectedItem().getId();
             for (int i = 0; i < korhazLista.size(); i++) {
@@ -716,6 +932,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
         Boolean mezoureskorhaz = false;
         Boolean nyitv = false;
+        Boolean juttatasformat = false;
         Boolean juttatascheck = false;
         if(VeradoPontNeveField.getText().equals("")||
             VeradoPontJuttatasField.getText().equals("")||
@@ -727,31 +944,30 @@ public class FXMLStudentsSceneController implements Initializable {
 
         }
         else{
-            /*if(VeradoPontJuttatasField.getText()!="true"&&VeradoPontJuttatasField.getText()!="false"){
-                WarningPopUpWindow("Kérlek true vagy false értéket adj meg juttatásnak!");
-                juttatascheck=true;
-            }*/
 
           nyitv = CheckTimeFormatum(VeradoPontNyitvatartasField.getText());
 
         }
-        if(mezoureskorhaz==false&&nyitv==true) {
-
-            if (!VeradoPontJuttatasField.getText().equals("")) {
-
-                if (VeradoPontJuttatasField.getText().equals("true")) {
-                    seged = true;
-                } else if (VeradoPontJuttatasField.getText().equals("false")) {
-                    seged = false;
+        if (!VeradoPontJuttatasField.getText().equals("")) {
+            if (VeradoPontJuttatasField.getText().equals("VAN") || VeradoPontJuttatasField.getText().equals("NINCS")) {
+                if (VeradoPontJuttatasField.getText().equals("VAN")) {
+                    juttatascheck = true;
+                } else {
+                    juttatascheck = false;
                 }
-
-                korhaz.setJuttatas(seged);
+                juttatasformat = true;
+            } else {
+                WarningPopUpWindow("Hibás juttatás formátum!(VAN vagy NINCS)");
             }
+        }
+
+        if(mezoureskorhaz==false&&nyitv==true && juttatasformat == true) {
+
 
             Korhaz korhaz = new Korhaz();
             korhaz.setNev(VeradoPontNeveField.getText());
             korhaz.setIdo(VeradoPontNyitvatartasField.getText());
-            korhaz.setJuttatas(seged);
+            korhaz.setJuttatas(juttatascheck);
             korhaz.setHelyszin(VeradoPontHelyField.getText());
 
             korhazLista.add(korhaz);
@@ -770,7 +986,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
     @FXML
     void VeradoPontKeresButtonPushed(ActionEvent event) {
-
+    VPUpdateTableView();
     }
 
     @FXML
@@ -802,6 +1018,7 @@ public class FXMLStudentsSceneController implements Initializable {
         Boolean mezoureskorhaz = false;
         Boolean nyitv = false;
         Boolean juttatascheck = false;
+        Boolean juttatasformat = false;
         if(VeradoPontNeveFieldUpdate1.getText().equals("")||
                 VeradoPontJuttatasFieldUpdate1.getText().equals("")||
                 VeradoPontNyitvatartasFieldUpdate1.getText().equals("")||
@@ -812,14 +1029,22 @@ public class FXMLStudentsSceneController implements Initializable {
 
         }
         else{
-            /*if(VeradoPontJuttatasField.getText()!="true"&&VeradoPontJuttatasField.getText()!="false"){
-                WarningPopUpWindow("Kérlek true vagy false értéket adj meg juttatásnak!");
-                juttatascheck=true;
-            }*/
+            if (!VeradoPontJuttatasFieldUpdate1.getText().equals("")) {
+                if (VeradoPontJuttatasFieldUpdate1.getText().equals("VAN") || VeradoPontJuttatasFieldUpdate1.getText().equals("NINCS")) {
+                    if (VeradoPontJuttatasFieldUpdate1.getText().equals("VAN")) {
+                        juttatascheck = true;
+                    } else {
+                        juttatascheck = false;
+                    }
+                    juttatasformat = true;
+                } else {
+                    WarningPopUpWindow("Hibás juttatás formátum!(VAN vagy NINCS)");
+                }
+            }
 
            nyitv = CheckTimeFormatum(VeradoPontNyitvatartasFieldUpdate1.getText());
         }
-        if(mezoureskorhaz==false&&nyitv==true) {
+        if(mezoureskorhaz==false&&nyitv==true && juttatasformat == true) {
 
 
             ConnectionDB ucn = new ConnectionDB();
