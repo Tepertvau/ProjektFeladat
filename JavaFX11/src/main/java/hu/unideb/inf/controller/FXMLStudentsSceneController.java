@@ -512,6 +512,9 @@ public class FXMLStudentsSceneController implements Initializable {
     private Button myTorolButton;
     @FXML
     private Button myKeresButton;
+    @FXML
+    private Button updateButton1;
+
 
     //BUTTON INICIALIZALAS
 
@@ -670,7 +673,7 @@ public class FXMLStudentsSceneController implements Initializable {
         singleVerado = VeradoTabla.getSelectionModel().getSelectedItems();
         singleVerado.forEach(allVerado::remove);
         System.out.println(VeradoTabla.getSelectionModel().getSelectedItem());
-        int ID = VeradoTabla.getSelectionModel().getSelectedItem().getId()+1;
+        int ID = VeradoTabla.getSelectionModel().getSelectedItem().getId();
         PreparedStatement statement = cn1.prepareStatement("DELETE FROM VERADO WHERE ID ="+ID+";");
 
         statement.execute();
@@ -683,6 +686,85 @@ public class FXMLStudentsSceneController implements Initializable {
 
 
         VUpdateTabeleView();
+    }
+
+    @FXML
+    void VeradoUpdateButtonPushed(ActionEvent event) throws SQLException{
+
+        String[] VercsoportTomb = {"A+", "A-","B+","B-","AB+","AB-","0+","0-"};
+
+
+        Boolean mezoures = false;
+        Boolean vercsoportcontain = false;
+
+        if(VeradoMennyisegFieldUpdate1.getText().equals("") ||
+                VeradoNevFieldUpdate1.getText().equals("") ||
+                VeradoVercsoportFieldUpdate1.getText().equals("") ||
+                korhazHozzaFieldUpdate1.getText().equals(""))
+        {
+            WarningPopUpWindow("Hiba! Ne hagyj üres mezőt.");
+            mezoures = true;
+        }
+        else {
+            if (CheckIfConChar(VeradoMennyisegFieldUpdate1.getText())){
+                WarningPopUpWindow("Hiba! Csak számot adj meg mennyiségnek.");
+
+            }
+
+            for (int i = 0; i < VercsoportTomb.length; i++) {
+                if (VercsoportTomb[i].equals(VeradoVercsoportFieldUpdate1.getText())) {
+                    vercsoportcontain = true;
+                    break;
+                }
+            }
+
+            if (vercsoportcontain == false) {
+                WarningPopUpWindow("Hiba! Nem megfelelő vércsoport formátum.");
+            }
+
+            for (int i = 0; i < VeradoNevFieldUpdate1.getText().length(); i++) {
+
+                if (CheckIfConNumb(VeradoNevFieldUpdate1.getText())) {
+                    WarningPopUpWindow("Hiba! Rossz név formátum.");
+                    break;
+                }
+
+            }
+        }
+        if (CheckIfConChar(VeradoMennyisegFieldUpdate1.getText()) == false &&
+                mezoures == false &&
+                vercsoportcontain == true &&
+                CheckIfConNumb(VeradoNevFieldUpdate1.getText()) == false) {
+
+            ConnectionDB ucn = new ConnectionDB();
+            Connection ucn1 = ucn.fileconnection();
+            ObservableList<Verado> allUpdateVerado, singleUpdateVerado;
+            allUpdateVerado = VeradoTabla.getItems();
+
+            singleUpdateVerado = VeradoTabla.getSelectionModel().getSelectedItems();
+            //singleUpdateVerado.forEach(allUpdateVerado::set);
+            String segedID = "";
+            int ID = VeradoTabla.getSelectionModel().getSelectedItem().getId();
+            for (int i = 0; i < korhazLista.size(); i++) {
+                System.out.println(korhazHozzaField.getText());
+                if (korhazLista.get(i).getNev().equals(korhazHozzaFieldUpdate1.getText())) {
+                    segedID = korhazLista.get(i).getId() + "";
+
+
+                }
+            }
+            PreparedStatement statement = ucn1.prepareStatement("UPDATE VERADO SET NEV='" + VeradoNevFieldUpdate1.getText() + "',KORHAZID='" + segedID + "',MENNYISEG='" + VeradoMennyisegFieldUpdate1.getText() + "',VERCSOPORT='" + VeradoVercsoportFieldUpdate1.getText() + "' WHERE ID=" + ID + ";");
+            statement.execute();
+            veradoLista.clear();
+            try {
+                veradoLista = GetVerado();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            VUpdateTabeleView();
+
+
+        }
     }
 
 //VERADO BUTTONOK VEGE
@@ -750,6 +832,16 @@ public class FXMLStudentsSceneController implements Initializable {
     private TextField VeradoKeresoField;
     @FXML
     private TextField VeradoVercsoportField;
+    @FXML
+    private TextField VeradoNevFieldUpdate1;
+    @FXML
+    private TextField VeradoVercsoportFieldUpdate1;
+    @FXML
+    private TextField VeradoMennyisegFieldUpdate1;
+    @FXML
+    private TextField korhazHozzaFieldUpdate1;
+
+
 
 
 ////////////////////////////////////////Verado pont Tab///////////////////////////////////////
@@ -788,6 +880,14 @@ public class FXMLStudentsSceneController implements Initializable {
     private TextField VeradoPontJuttatasField;
     @FXML
     private TextField VeradoPontNeveField;
+    @FXML
+    private TextField VeradoPontNeveFieldUpdate1;
+    @FXML
+    private TextField VeradoPontJuttatasFieldUpdate1;
+    @FXML
+    private TextField VeradoPontNyitvatartasFieldUpdate1;
+    @FXML
+    private TextField VeradoPontHelyFieldupdate1;
 
     //VERADOPONT TEXTFIELD VEGE
 
@@ -831,6 +931,8 @@ public class FXMLStudentsSceneController implements Initializable {
 
     @FXML
     private Button VeradoPontHButton1;
+    @FXML
+    private Button VeradoPontHButtonUpdate1;
 
     @FXML
     private  TextField korhazHozzaField;
@@ -921,7 +1023,7 @@ public class FXMLStudentsSceneController implements Initializable {
         singleKorhaz = VeradoPontTabla.getSelectionModel().getSelectedItems();
         singleKorhaz.forEach(allKorhaz::remove);
 
-        int ID = VeradoPontTabla.getSelectionModel().getSelectedItem().getId()+1;
+        int ID = VeradoPontTabla.getSelectionModel().getSelectedItem().getId();
         PreparedStatement statement = cn1.prepareStatement("DELETE FROM KORHAZ WHERE ID ="+ID+";");
 
         statement.execute();
@@ -934,6 +1036,63 @@ public class FXMLStudentsSceneController implements Initializable {
 
 
         VPUpdateTableView();
+    }
+
+    @FXML
+    void VeradoPontHozzaadUpdateButtonPushed(ActionEvent event)throws SQLException{
+        Boolean mezoureskorhaz = false;
+        Boolean nyitv = false;
+        Boolean juttatascheck = false;
+        if(VeradoPontNeveFieldUpdate1.getText().equals("")||
+                VeradoPontJuttatasFieldUpdate1.getText().equals("")||
+                VeradoPontNyitvatartasFieldUpdate1.getText().equals("")||
+                VeradoPontHelyFieldupdate1.getText().equals("")
+        ){
+            WarningPopUpWindow("Hiba! Ne hagyj ures mezot!");
+            mezoureskorhaz=true;
+
+        }
+        else{
+            /*if(VeradoPontJuttatasField.getText()!="true"&&VeradoPontJuttatasField.getText()!="false"){
+                WarningPopUpWindow("Kérlek true vagy false értéket adj meg juttatásnak!");
+                juttatascheck=true;
+            }*/
+
+            String[] split=VeradoPontNyitvatartasFieldUpdate1.getText().split(":");
+            if(VeradoPontNyitvatartasFieldUpdate1.getText().length()==11) {
+                if (VeradoPontNyitvatartasFieldUpdate1.getText().charAt(2) == ':' && VeradoPontNyitvatartasFieldUpdate1.getText().charAt(5) == '-' && VeradoPontNyitvatartasFieldUpdate1.getText().charAt(8) == ':') {
+                    nyitv = true;
+                }
+                else{
+                    WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
+                }
+            }else{
+                WarningPopUpWindow("Ügyelj arra hogy megfelelő formátumban add meg a nyitvatartást! (óó:pp-óó:pp");
+            }
+
+        }
+        if(mezoureskorhaz==false&&nyitv==true) {
+
+
+            ConnectionDB ucn = new ConnectionDB();
+            Connection ucn1 = ucn.fileconnection();
+            ObservableList<Korhaz> allUpdateVerado, singleUpdateVerado;
+            allUpdateVerado = VeradoPontTabla.getItems();
+
+            singleUpdateVerado = VeradoPontTabla.getSelectionModel().getSelectedItems();
+            //singleUpdateVerado.forEach(allUpdateVerado::set);
+            String segedID = "";
+            int ID = VeradoPontTabla.getSelectionModel().getSelectedItem().getId();
+            PreparedStatement statement = ucn1.prepareStatement("UPDATE KORHAZ SET HELYSZIN='" + VeradoPontHelyFieldupdate1.getText() + "',IDO='" + VeradoPontNyitvatartasFieldUpdate1.getText() + "',JUTTATAS='" + VeradoPontJuttatasFieldUpdate1.getText() + "',NEV='" + VeradoPontNeveFieldUpdate1.getText() + "' WHERE ID=" + ID + ";");
+            statement.execute();
+            korhazLista.clear();
+            try {
+                korhazLista = GetKorhaz();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            VPUpdateTableView();
+        }
     }
 
 //VERADOPONT GOMBOK VEGE

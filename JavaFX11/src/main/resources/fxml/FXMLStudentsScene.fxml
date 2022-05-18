@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -28,35 +27,11 @@
                   </TableView>
                   <Button layoutX="125.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
                   <TextField fx:id="VeradoKeresoField" layoutX="388.0" layoutY="30.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
-                  <Button layoutX="695.0" layoutY="75.0" mnemonicParsing="false" onAction="#VeradoKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres" />
-                  <Pane layoutX="675.0" layoutY="114.0" prefHeight="70.0" prefWidth="134.0" styleClass="pane">
-                     <children>
-                        <Text fill="WHITE" layoutX="37.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mennyiség" />
-                        <TextField fx:id="VeradoMennyisegMin" layoutX="6.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-tól" />
-                        <TextField fx:id="VeradoMennyisegMax" layoutX="69.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-ig" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="691.0" layoutY="236.0" prefHeight="194.0" prefWidth="91.0" styleClass="pane">
-                     <children>
-                        <CheckBox alignment="CENTER" layoutX="2.0" layoutY="16.0" mnemonicParsing="false" onAction="#SetVercsoportAPlusz" prefHeight="17.0" prefWidth="88.0" text="+A" />
-                        <CheckBox alignment="CENTER" layoutX="2.0" layoutY="37.0" mnemonicParsing="false" onAction="#SetVercsoportAMinusz" prefHeight="17.0" prefWidth="87.0" text="-A" />
-                        <CheckBox alignment="CENTER" layoutX="2.0" layoutY="58.0" mnemonicParsing="false" onAction="#SetVercsoportBPlusz" prefHeight="17.0" prefWidth="89.0" text="+B" />
-                        <CheckBox alignment="CENTER" layoutX="2.0" layoutY="78.0" mnemonicParsing="false" onAction="#SetVercsoportBMinusz" prefHeight="17.0" prefWidth="88.0" text="-B" />
-                        <CheckBox alignment="CENTER" layoutX="2.0" layoutY="99.0" mnemonicParsing="false" onAction="#SetVercsoportABPlusz" prefHeight="17.0" prefWidth="87.0" text="+AB" />
-                        <CheckBox alignment="CENTER" layoutX="2.0" layoutY="120.0" mnemonicParsing="false" onAction="#SetVercsoportABMinusz" prefHeight="17.0" prefWidth="89.0" text="-AB" />
-                        <CheckBox alignment="CENTER" layoutX="2.0" layoutY="141.0" mnemonicParsing="false" onAction="#SetVercsoportOPlusz" prefHeight="17.0" prefWidth="89.0" text="+0" />
-                        <CheckBox alignment="CENTER" layoutX="2.0" layoutY="162.0" mnemonicParsing="false" onAction="#SetVercsoportOMinusz" prefHeight="17.0" prefWidth="89.0" text="-0" />
-                     </children>
-                  </Pane>
+                  <Button layoutX="740.0" layoutY="30.0" mnemonicParsing="false" onAction="#VeradoKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres" />
                   <TextField fx:id="VeradoVercsoportField" layoutX="29.0" layoutY="328.0" prefHeight="26.0" prefWidth="185.0" promptText="Vércsoport" />
                   <TextField fx:id="VeradoMennyisegField" layoutX="29.0" layoutY="364.0" prefHeight="26.0" prefWidth="185.0" promptText="Mennyiség" />
                   <TextField fx:id="VeradoNevField" layoutX="29.0" layoutY="290.0" prefHeight="26.0" prefWidth="185.0" promptText="Név" />
                   <Button fx:id="myButton" layoutX="29.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
-                  <Pane layoutX="692.0" layoutY="198.0" prefHeight="34.0" prefWidth="88.0" styleClass="pane">
-                     <children>
-                        <Text fill="WHITE" layoutX="15.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vércsoport" />
-                     </children>
-                  </Pane>
                   <Pane layoutX="25.0" layoutY="36.0" prefHeight="244.0" prefWidth="91.0" styleClass="pane">
                      <children>
                         <Text fill="WHITE" layoutX="4.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Összes vér(ml):" textAlignment="CENTER" wrappingWidth="84.03971481323242" />
@@ -82,7 +57,12 @@
                         <Text fx:id="OMCounter" fill="WHITE" layoutX="40.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
                      </children>
                   </Pane>
-                  <TextField fx:id="korhazHozzaField" layoutX="24.0" layoutY="402.0" prefHeight="26.0" prefWidth="185.0" promptText="Melyik_korhaz" />
+                  <TextField fx:id="korhazHozzaField" layoutX="29.0" layoutY="402.0" prefHeight="26.0" prefWidth="185.0" promptText="Melyik_korhaz" />
+                  <TextField fx:id="VeradoNevFieldUpdate1" layoutX="689.0" layoutY="234.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_név" />
+                  <TextField fx:id="VeradoVercsoportFieldUpdate1" layoutX="689.0" layoutY="277.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Vércsoport" />
+                  <TextField fx:id="VeradoMennyisegFieldUpdate1" layoutX="689.0" layoutY="315.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Mennyiség" />
+                  <TextField fx:id="korhazHozzaFieldUpdate1" layoutX="689.0" layoutY="354.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Melyik_korhaz" />
+                  <Button fx:id="updateButton1" layoutX="740.0" layoutY="430.0" mnemonicParsing="false" onAction="#VeradoUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Update" />
                </children>
             </AnchorPane>
          </content>
@@ -91,7 +71,7 @@
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="AnchorPane">
                <children>
-                  <TableView fx:id="VeradoPontTabla" layoutX="436.0" layoutY="68.0" prefHeight="419.0" prefWidth="386.0" styleClass="tableview">
+                  <TableView fx:id="VeradoPontTabla" layoutX="211.0" layoutY="67.0" prefHeight="419.0" prefWidth="386.0" styleClass="tableview">
                      <columns>
                         <TableColumn fx:id="VeradoPontAzonositoOszlop" prefWidth="75.0" text="Azonosító" />
                         <TableColumn fx:id="VeradoPontNeveOszlop" prefWidth="80.79998779296875" text="Kórház neve" />
@@ -100,21 +80,26 @@
                         <TableColumn fx:id="VeradoPontHelyeOszlop" prefWidth="78.39990234375" text="Helyszín" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="VeradoPontKeresoField" layoutX="294.0" layoutY="68.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
-                  <Button layoutX="318.0" layoutY="103.0" mnemonicParsing="false" onAction="#VeradoPontKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres" />
-                  <TextField fx:id="VeradoPontNeveField" layoutX="293.0" layoutY="136.0" prefHeight="26.0" prefWidth="133.0" promptText="Kórház név" />
-                  <TextField fx:id="VeradoPontJuttatasField" layoutX="294.0" layoutY="168.0" prefHeight="26.0" prefWidth="132.0" promptText="Juttatás" />
-                  <TextField fx:id="VeradoPontNyitvatartasField" layoutX="294.0" layoutY="202.0" prefHeight="26.0" prefWidth="132.0" promptText="Nyitvatartás" />
-                  <TextField fx:id="VeradoPontHelyField" layoutX="294.0" layoutY="236.0" prefHeight="26.0" prefWidth="132.0" promptText="Hely" />
-                  <Button fx:id="VeradoPontHButton" layoutX="318.0" layoutY="276.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
-                  <Button layoutX="319.0" layoutY="424.0" mnemonicParsing="false" onAction="#VeradoPontTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
-                  <Pane layoutX="293.0" layoutY="333.0" prefHeight="70.0" prefWidth="134.0" styleClass="pane">
+                  <TextField fx:id="VeradoPontKeresoField" layoutX="40.0" layoutY="68.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
+                  <Button layoutX="65.0" layoutY="103.0" mnemonicParsing="false" onAction="#VeradoPontKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres" />
+                  <TextField fx:id="VeradoPontNeveField" layoutX="40.0" layoutY="142.0" prefHeight="26.0" prefWidth="133.0" promptText="Kórház név" />
+                  <TextField fx:id="VeradoPontJuttatasField" layoutX="41.0" layoutY="176.0" prefHeight="26.0" prefWidth="132.0" promptText="Juttatás" />
+                  <TextField fx:id="VeradoPontNyitvatartasField" layoutX="41.0" layoutY="210.0" prefHeight="26.0" prefWidth="132.0" promptText="Nyitvatartás" />
+                  <TextField fx:id="VeradoPontHelyField" layoutX="40.0" layoutY="250.0" prefHeight="26.0" prefWidth="132.0" promptText="Hely" />
+                  <Button fx:id="VeradoPontHButton" layoutX="65.0" layoutY="288.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
+                  <Button layoutX="65.0" layoutY="423.0" mnemonicParsing="false" onAction="#VeradoPontTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
+                  <Pane layoutX="40.0" layoutY="337.0" prefHeight="70.0" prefWidth="134.0" styleClass="pane">
                      <children>
                         <Text fill="WHITE" layoutX="36.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nyitvatartás" />
                         <TextField fx:id="VeradoPontNyitvatartasMinField" layoutX="6.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-tól" />
                         <TextField fx:id="VeradoPontNyitvatartasMaxField" layoutX="69.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-ig" />
                      </children>
                   </Pane>
+                  <TextField fx:id="VeradoPontNeveFieldUpdate1" layoutX="680.0" layoutY="90.0" prefHeight="26.0" prefWidth="133.0" promptText="Új_Kórház név" />
+                  <TextField fx:id="VeradoPontJuttatasFieldUpdate1" layoutX="681.0" layoutY="129.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Juttatás" />
+                  <TextField fx:id="VeradoPontNyitvatartasFieldUpdate1" layoutX="681.0" layoutY="168.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Nyitvatartás" />
+                  <TextField fx:id="VeradoPontHelyFieldupdate1" layoutX="681.0" layoutY="202.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Hely" />
+                  <Button fx:id="VeradoPontHButtonUpdate1" layoutX="705.0" layoutY="244.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
                </children>
             </AnchorPane>
          </content>
