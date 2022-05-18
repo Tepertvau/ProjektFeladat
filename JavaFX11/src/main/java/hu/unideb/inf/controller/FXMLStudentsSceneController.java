@@ -1056,7 +1056,14 @@ public class FXMLStudentsSceneController implements Initializable {
             //singleUpdateVerado.forEach(allUpdateVerado::set);
             String segedID = "";
             int ID = VeradoPontTabla.getSelectionModel().getSelectedItem().getId();
-            PreparedStatement statement = ucn1.prepareStatement("UPDATE KORHAZ SET HELYSZIN='" + VeradoPontHelyFieldupdate1.getText() + "',IDO='" + VeradoPontNyitvatartasFieldUpdate1.getText() + "',JUTTATAS='" + VeradoPontJuttatasFieldUpdate1.getText() + "',NEV='" + VeradoPontNeveFieldUpdate1.getText() + "' WHERE ID=" + ID + ";");
+            Boolean segedJuttatas=false;
+            if(VeradoPontJuttatasFieldUpdate1.getText().equals("true")){
+                segedJuttatas=true;
+            }
+            else{
+                segedJuttatas=false;
+            }
+            PreparedStatement statement = ucn1.prepareStatement("UPDATE KORHAZ SET HELYSZIN='" + VeradoPontHelyFieldupdate1.getText() + "',IDO='" + VeradoPontNyitvatartasFieldUpdate1.getText() + "',JUTTATAS='" + segedJuttatas + "',NEV='" + VeradoPontNeveFieldUpdate1.getText() + "' WHERE ID=" + ID + ";");
             statement.execute();
             korhazLista.clear();
             try {

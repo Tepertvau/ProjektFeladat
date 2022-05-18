@@ -31,7 +31,6 @@ public class Verado implements Serializable {
     }
 
 
-
     public int getId() {
         return id;
     }

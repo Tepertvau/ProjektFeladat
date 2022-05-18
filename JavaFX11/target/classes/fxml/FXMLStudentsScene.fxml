@@ -81,11 +81,11 @@
                <children>
                   <TableView fx:id="VeradoPontTabla" layoutX="164.0" layoutY="69.0" prefHeight="388.0" prefWidth="502.0" styleClass="tableview">
                      <columns>
-                        <TableColumn fx:id="VeradoPontAzonositoOszlop" prefWidth="64.7999267578125" text="Azonosító" />
-                        <TableColumn fx:id="VeradoPontNeveOszlop" prefWidth="91.2000732421875" text="Helyszín" />
-                        <TableColumn fx:id="VeradoPontNyitvatartasOszlop" prefWidth="84.0" text="Nyitvatartás" />
-                        <TableColumn fx:id="VeradoPontJuttatasOszlop" prefWidth="64.0" text="Juttatás" />
-                        <TableColumn fx:id="VeradoPontHelyeOszlop" prefWidth="119.0" text="Kórház neve" />
+                        <TableColumn fx:id="VeradoPontAzonositoOszlop" prefWidth="74.0" text="Azonosító" />
+                        <TableColumn fx:id="VeradoPontNeveOszlop" prefWidth="124.0" text="Helyszín" />
+                        <TableColumn fx:id="VeradoPontNyitvatartasOszlop" prefWidth="110.0" text="Nyitvatartás" />
+                        <TableColumn fx:id="VeradoPontJuttatasOszlop" prefWidth="66.0" text="Juttatás" />
+                        <TableColumn fx:id="VeradoPontHelyeOszlop" prefWidth="127.0" text="Kórház neve" />
                      </columns>
                   </TableView>
                   <TextField fx:id="VeradoPontKeresoField" layoutX="26.0" layoutY="79.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
@@ -136,10 +136,10 @@
                   <TableView fx:id="VeradoTabla" layoutX="224.0" layoutY="36.0" prefHeight="435.0" prefWidth="460.0" styleClass="tableview">
                      <columns>
                         <TableColumn fx:id="AzonositoOszlop" prefWidth="67.199951171875" text="Azonosító" />
-                        <TableColumn fx:id="NevOszlop" prefWidth="70.0" text="Mennyiség" />
-                        <TableColumn fx:id="VercsoportOszlop" prefWidth="161.0" text="Név" />
-                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="61.5999755859375" text="KórházID" />
-                        <TableColumn fx:id="MennyisegOszlop" prefWidth="68.0" text="Vércsoport" />
+                        <TableColumn fx:id="NevOszlop" prefWidth="106.0" text="Mennyiség" />
+                        <TableColumn fx:id="VercsoportOszlop" prefWidth="137.0" text="Név" />
+                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="72.0" text="KórházID" />
+                        <TableColumn fx:id="MennyisegOszlop" prefWidth="76.0" text="Vércsoport" />
                      </columns>
                   </TableView>
                   <Button layoutX="412.0" layoutY="485.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl">
