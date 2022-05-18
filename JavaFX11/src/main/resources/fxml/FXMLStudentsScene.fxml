@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <TabPane prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.FXMLStudentsSceneController">
@@ -17,7 +19,16 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="AnchorPane" stylesheets="@styles.css">
                <children>
-                  <TextArea layoutX="234.0" layoutY="128.0" prefHeight="218.0" prefWidth="438.0" promptText="A legalapvetőbb tudnivalókVéradásra jelentkezhet minden 18 és 65 év közötti egészséges felnőtt ember, a férfiak pedig akár 5-ször, nők maximum 3-szor adhatnak vért egy évben. Két teljes véradás között legkevesebb 56 napnak kell eltelnie. Minden véradást orvosi vizsgálat előz meg, a véradásra való alkalmasságot jelenleg Magyarországon mindig orvos dönti el, a leendő véradó részletes kikérdezése - korábbi és jelenlegi betegségeiről, egészségi állapotáról -, és fizikális vizsgálata után. Az orvosi vizsgálat vérnyomásmérésből, a szív és a tüdő meghallgatásából, a nyaki nyirokcsomók tapintásából, a látható nyálkahártyák megtekintéséből áll. Megnézik vér hemoglobin (vérfesték) koncentrációját is (első véradóknál az előzetes vércsoport-meghatározás megtörténik). Ha a vizsgálat során eltérést találnak, akkor időlegesen vagy véglegesen kizárják a donort a véradásból." />
+                  <Label layoutX="80.0" layoutY="178.0" prefHeight="300.0" prefWidth="748.0" text="Véradásra jelentkezhet minden 18 és 65 év közötti egészséges felnőtt ember, a férfiak pedig akár 5-ször, nők maximum 3-szor adhatnak vért egy évben. Két teljes véradás között legkevesebb 56 napnak kell eltelnie. Minden véradást orvosi vizsgálat előz meg, a véradásra való alkalmasságot jelenleg Magyarországon mindig orvos dönti el, a leendő véradó részletes kikérdezése - korábbi és jelenlegi betegségeiről, egészségi állapotáról -, és fizikális vizsgálata után. Az orvosi vizsgálat vérnyomásmérésből, a szív és a tüdő meghallgatásából, a nyaki nyirokcsomók tapintásából, a látható nyálkahártyák megtekintéséből áll. Megnézik vér hemoglobin (vérfesték) koncentrációját is (első véradóknál az előzetes vércsoport-meghatározás megtörténik). Ha a vizsgálat során eltérést találnak, akkor időlegesen vagy véglegesen kizárják a donort a véradásból." textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="Arial Black" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="230.0" layoutY="108.0" text="A legalapvetőbb tudnivalók" textAlignment="CENTER" underline="true">
+                     <font>
+                        <Font name="Arial Black" size="30.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </content>
@@ -28,43 +39,52 @@
                <children>
                   <TableView fx:id="VeradoTabla" layoutX="239.0" layoutY="64.0" prefHeight="392.0" prefWidth="430.0" styleClass="tableview">
                      <columns>
-                        <TableColumn fx:id="AzonositoOszlop" prefWidth="75.0" text="Azonosító" />
-                        <TableColumn fx:id="NevOszlop" prefWidth="80.79998779296875" text="Nev" />
-                        <TableColumn fx:id="VercsoportOszlop" prefWidth="76.79998779296875" text="Vercsoport" />
-                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="79.0" text="KorhazID" />
-                        <TableColumn fx:id="MennyisegOszlop" prefWidth="76.0" text="Mennyiseg" />
+                        <TableColumn fx:id="AzonositoOszlop" prefWidth="67.199951171875" text="Azonosító" />
+                        <TableColumn fx:id="NevOszlop" prefWidth="71.2000732421875" text="Mennyiség" />
+                        <TableColumn fx:id="VercsoportOszlop" prefWidth="158.39999389648438" text="Név" />
+                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="61.5999755859375" text="KórházID" />
+                        <TableColumn fx:id="MennyisegOszlop" prefWidth="72.0" text="Vércsoport" />
                      </columns>
                   </TableView>
-                  <Button layoutX="125.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
+                  <Button layoutX="125.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <TextField fx:id="VeradoKeresoField" layoutX="388.0" layoutY="30.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
-                  <Button layoutX="740.0" layoutY="30.0" mnemonicParsing="false" onAction="#VeradoKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres" />
+                  <Button layoutX="740.0" layoutY="30.0" mnemonicParsing="false" onAction="#VeradoKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <TextField fx:id="VeradoVercsoportField" layoutX="29.0" layoutY="328.0" prefHeight="26.0" prefWidth="185.0" promptText="Vércsoport" />
                   <TextField fx:id="VeradoMennyisegField" layoutX="29.0" layoutY="364.0" prefHeight="26.0" prefWidth="185.0" promptText="Mennyiség" />
                   <TextField fx:id="VeradoNevField" layoutX="29.0" layoutY="290.0" prefHeight="26.0" prefWidth="185.0" promptText="Név" />
-                  <Button fx:id="myButton" layoutX="29.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
+                  <Button fx:id="myButton" layoutX="29.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Pane layoutX="25.0" layoutY="36.0" prefHeight="244.0" prefWidth="91.0" styleClass="pane">
                      <children>
-                        <Text fill="WHITE" layoutX="4.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Összes vér(ml):" textAlignment="CENTER" wrappingWidth="84.03971481323242" />
-                        <Text fill="WHITE" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+A" textAlignment="CENTER" wrappingWidth="89.94921875" />
-                        <Text fill="WHITE" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-A" textAlignment="CENTER" wrappingWidth="90.5390625" />
-                        <Text fill="WHITE" layoutX="-1.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+B" textAlignment="CENTER" wrappingWidth="92.087890625" />
-                        <Text fill="WHITE" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-B" textAlignment="CENTER" wrappingWidth="90.677734375" />
-                        <Text fill="WHITE" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+AB" textAlignment="CENTER" wrappingWidth="90.828125" />
-                        <Text fill="WHITE" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-AB" textAlignment="CENTER" wrappingWidth="90.41796875" />
-                        <Text fill="WHITE" layoutX="1.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+0" textAlignment="CENTER" wrappingWidth="89.677734375" />
-                        <Text fill="WHITE" layoutX="-1.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-0" textAlignment="CENTER" wrappingWidth="91.267578125" />
+                        <Text fill="WHITE" layoutX="4.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Összes vér(ml):" textAlignment="CENTER" wrappingWidth="85.0" />
+                        <Text fill="WHITE" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A+" textAlignment="CENTER" wrappingWidth="90.0" />
+                        <Text fill="WHITE" layoutX="-1.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A-" textAlignment="CENTER" wrappingWidth="90.0" />
+                        <Text fill="WHITE" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B+" textAlignment="CENTER" wrappingWidth="90.0" />
+                        <Text fill="WHITE" layoutX="-1.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="B-" textAlignment="CENTER" wrappingWidth="90.0" />
+                        <Text fill="WHITE" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AB+" textAlignment="CENTER" wrappingWidth="90.0" />
+                        <Text fill="WHITE" layoutX="-1.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AB-" textAlignment="CENTER" wrappingWidth="90.0" />
+                        <Text fill="WHITE" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0+" textAlignment="CENTER" wrappingWidth="90.0" />
+                        <Text fill="WHITE" layoutX="-1.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0-" textAlignment="CENTER" wrappingWidth="90.0" />
                      </children>
                   </Pane>
                   <Pane layoutX="121.0" layoutY="36.0" prefHeight="244.0" prefWidth="91.0" styleClass="pane">
                      <children>
-                        <Text fx:id="APlusCounter" fill="WHITE" layoutX="40.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
-                        <Text fx:id="AMCounter" fill="WHITE" layoutX="40.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
-                        <Text fx:id="BPCounter" fill="WHITE" layoutX="40.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
-                        <Text fx:id="BMCounter" fill="WHITE" layoutX="40.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
-                        <Text fx:id="ABPCounter" fill="WHITE" layoutX="39.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
-                        <Text fx:id="ABMCounter" fill="WHITE" layoutX="40.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
-                        <Text fx:id="OPCounter" fill="WHITE" layoutX="40.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
-                        <Text fx:id="OMCounter" fill="WHITE" layoutX="40.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="APlusCounter" fill="WHITE" layoutX="40.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="AMCounter" fill="WHITE" layoutX="40.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="BPCounter" fill="WHITE" layoutX="40.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="BMCounter" fill="WHITE" layoutX="40.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="ABPCounter" fill="WHITE" layoutX="40.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="ABMCounter" fill="WHITE" layoutX="40.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="OPCounter" fill="WHITE" layoutX="40.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
+                        <Text fx:id="OMCounter" fill="WHITE" layoutX="40.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
                      </children>
                   </Pane>
                   <TextField fx:id="korhazHozzaField" layoutX="29.0" layoutY="402.0" prefHeight="26.0" prefWidth="185.0" promptText="Melyik_korhaz" />
@@ -72,7 +92,10 @@
                   <TextField fx:id="VeradoVercsoportFieldUpdate1" layoutX="689.0" layoutY="277.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Vércsoport" />
                   <TextField fx:id="VeradoMennyisegFieldUpdate1" layoutX="689.0" layoutY="315.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Mennyiség" />
                   <TextField fx:id="korhazHozzaFieldUpdate1" layoutX="689.0" layoutY="354.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Melyik_korhaz" />
-                  <Button fx:id="updateButton1" layoutX="740.0" layoutY="430.0" mnemonicParsing="false" onAction="#VeradoUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Update" />
+                  <Button fx:id="updateButton1" layoutX="740.0" layoutY="430.0" mnemonicParsing="false" onAction="#VeradoUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Update">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </AnchorPane>
          </content>
@@ -81,23 +104,32 @@
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="AnchorPane">
                <children>
-                  <TableView fx:id="VeradoPontTabla" layoutX="211.0" layoutY="67.0" prefHeight="419.0" prefWidth="386.0" styleClass="tableview">
+                  <TableView fx:id="VeradoPontTabla" layoutX="211.0" layoutY="67.0" prefHeight="419.0" prefWidth="423.0" styleClass="tableview">
                      <columns>
-                        <TableColumn fx:id="VeradoPontAzonositoOszlop" prefWidth="75.0" text="Azonosító" />
-                        <TableColumn fx:id="VeradoPontNeveOszlop" prefWidth="80.79998779296875" text="Kórház neve" />
-                        <TableColumn fx:id="VeradoPontNyitvatartasOszlop" prefWidth="76.79998779296875" text="Nyitvatartás" />
-                        <TableColumn fx:id="VeradoPontJuttatasOszlop" prefWidth="75.199951171875" text="Juttatás" />
-                        <TableColumn fx:id="VeradoPontHelyeOszlop" prefWidth="78.39990234375" text="Helyszín" />
+                        <TableColumn fx:id="VeradoPontAzonositoOszlop" prefWidth="64.7999267578125" text="Azonosító" />
+                        <TableColumn fx:id="VeradoPontNeveOszlop" prefWidth="91.2000732421875" text="Helyszín" />
+                        <TableColumn fx:id="VeradoPontNyitvatartasOszlop" prefWidth="84.0" text="Nyitvatartás" />
+                        <TableColumn fx:id="VeradoPontJuttatasOszlop" prefWidth="56.0" text="Juttatás" />
+                        <TableColumn fx:id="VeradoPontHelyeOszlop" prefWidth="126.39999389648438" text="Kórház neve" />
                      </columns>
                   </TableView>
-                  <TextField fx:id="VeradoPontKeresoField" layoutX="40.0" layoutY="68.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
-                  <Button layoutX="65.0" layoutY="103.0" mnemonicParsing="false" onAction="#VeradoPontKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres" />
-                  <TextField fx:id="VeradoPontNeveField" layoutX="40.0" layoutY="142.0" prefHeight="26.0" prefWidth="133.0" promptText="Kórház név" />
-                  <TextField fx:id="VeradoPontJuttatasField" layoutX="41.0" layoutY="176.0" prefHeight="26.0" prefWidth="132.0" promptText="Juttatás" />
-                  <TextField fx:id="VeradoPontNyitvatartasField" layoutX="41.0" layoutY="210.0" prefHeight="26.0" prefWidth="132.0" promptText="Nyitvatartás" />
-                  <TextField fx:id="VeradoPontHelyField" layoutX="40.0" layoutY="250.0" prefHeight="26.0" prefWidth="132.0" promptText="Hely" />
-                  <Button fx:id="VeradoPontHButton" layoutX="65.0" layoutY="288.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
-                  <Button layoutX="65.0" layoutY="423.0" mnemonicParsing="false" onAction="#VeradoPontTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
+                  <TextField fx:id="VeradoPontKeresoField" layoutX="40.0" layoutY="70.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
+                  <Button layoutX="65.0" layoutY="105.0" mnemonicParsing="false" onAction="#VeradoPontKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <TextField fx:id="VeradoPontNeveField" layoutX="40.0" layoutY="140.0" prefHeight="26.0" prefWidth="133.0" promptText="Kórház név" />
+                  <TextField fx:id="VeradoPontJuttatasField" layoutX="40.0" layoutY="175.0" prefHeight="26.0" prefWidth="132.0" promptText="Juttatás" />
+                  <TextField fx:id="VeradoPontNyitvatartasField" layoutX="40.0" layoutY="210.0" prefHeight="26.0" prefWidth="132.0" promptText="Nyitvatartás" />
+                  <TextField fx:id="VeradoPontHelyField" layoutX="40.0" layoutY="245.0" prefHeight="26.0" prefWidth="132.0" promptText="Hely" />
+                  <Button fx:id="VeradoPontHButton" layoutX="65.0" layoutY="288.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button layoutX="65.0" layoutY="423.0" mnemonicParsing="false" onAction="#VeradoPontTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Pane layoutX="40.0" layoutY="337.0" prefHeight="70.0" prefWidth="134.0" styleClass="pane">
                      <children>
                         <Text fill="WHITE" layoutX="36.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nyitvatartás" />
@@ -106,10 +138,13 @@
                      </children>
                   </Pane>
                   <TextField fx:id="VeradoPontNeveFieldUpdate1" layoutX="680.0" layoutY="90.0" prefHeight="26.0" prefWidth="133.0" promptText="Új_Kórház név" />
-                  <TextField fx:id="VeradoPontJuttatasFieldUpdate1" layoutX="681.0" layoutY="129.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Juttatás" />
-                  <TextField fx:id="VeradoPontNyitvatartasFieldUpdate1" layoutX="681.0" layoutY="168.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Nyitvatartás" />
-                  <TextField fx:id="VeradoPontHelyFieldupdate1" layoutX="681.0" layoutY="202.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Hely" />
-                  <Button fx:id="VeradoPontHButtonUpdate1" layoutX="705.0" layoutY="244.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad" />
+                  <TextField fx:id="VeradoPontJuttatasFieldUpdate1" layoutX="680.0" layoutY="130.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Juttatás" />
+                  <TextField fx:id="VeradoPontNyitvatartasFieldUpdate1" layoutX="680.0" layoutY="170.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Nyitvatartás" />
+                  <TextField fx:id="VeradoPontHelyFieldupdate1" layoutX="680.0" layoutY="210.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Hely" />
+                  <Button fx:id="VeradoPontHButtonUpdate1" layoutX="705.0" layoutY="250.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Update">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </AnchorPane>
          </content>
