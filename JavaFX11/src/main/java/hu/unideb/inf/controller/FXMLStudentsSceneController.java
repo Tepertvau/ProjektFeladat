@@ -368,7 +368,7 @@ public class FXMLStudentsSceneController implements Initializable {
                         }
 
 
-
+//Imádom a GitHubot
 
             SetBloodCounters();
             VeradoTabla.setItems(veradoObservableList);
