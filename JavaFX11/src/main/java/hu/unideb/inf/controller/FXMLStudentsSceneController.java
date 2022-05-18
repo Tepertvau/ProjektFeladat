@@ -670,7 +670,7 @@ public class FXMLStudentsSceneController implements Initializable {
         singleVerado = VeradoTabla.getSelectionModel().getSelectedItems();
         singleVerado.forEach(allVerado::remove);
         System.out.println(VeradoTabla.getSelectionModel().getSelectedItem());
-        int ID = VeradoTabla.getSelectionModel().getSelectedItem().getId();
+        int ID = VeradoTabla.getSelectionModel().getSelectedItem().getId()+1;
         PreparedStatement statement = cn1.prepareStatement("DELETE FROM VERADO WHERE ID ="+ID+";");
 
         statement.execute();
@@ -921,7 +921,7 @@ public class FXMLStudentsSceneController implements Initializable {
         singleKorhaz = VeradoPontTabla.getSelectionModel().getSelectedItems();
         singleKorhaz.forEach(allKorhaz::remove);
 
-        int ID = VeradoPontTabla.getSelectionModel().getSelectedItem().getId();
+        int ID = VeradoPontTabla.getSelectionModel().getSelectedItem().getId()+1;
         PreparedStatement statement = cn1.prepareStatement("DELETE FROM KORHAZ WHERE ID ="+ID+";");
 
         statement.execute();

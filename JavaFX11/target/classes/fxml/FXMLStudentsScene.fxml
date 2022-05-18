@@ -27,7 +27,7 @@
                      </columns>
                   </TableView>
                   <Button layoutX="125.0" layoutY="443.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl" />
-                  <TextField fx:id="VeradoKeresoField" layoutX="388.0" layoutY="23.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
+                  <TextField fx:id="VeradoKeresoField" layoutX="388.0" layoutY="30.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
                   <Button layoutX="695.0" layoutY="75.0" mnemonicParsing="false" onAction="#VeradoKeresButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Keres" />
                   <Pane layoutX="675.0" layoutY="114.0" prefHeight="70.0" prefWidth="134.0" styleClass="pane">
                      <children>
