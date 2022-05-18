@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -19,16 +21,56 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="AnchorPane" stylesheets="@styles.css">
                <children>
-                  <Label layoutX="80.0" layoutY="178.0" prefHeight="300.0" prefWidth="748.0" text="Véradásra jelentkezhet minden 18 és 65 év közötti egészséges felnőtt ember, a férfiak pedig akár 5-ször, nők maximum 3-szor adhatnak vért egy évben. Két teljes véradás között legkevesebb 56 napnak kell eltelnie. Minden véradást orvosi vizsgálat előz meg, a véradásra való alkalmasságot jelenleg Magyarországon mindig orvos dönti el, a leendő véradó részletes kikérdezése - korábbi és jelenlegi betegségeiről, egészségi állapotáról -, és fizikális vizsgálata után. Az orvosi vizsgálat vérnyomásmérésből, a szív és a tüdő meghallgatásából, a nyaki nyirokcsomók tapintásából, a látható nyálkahártyák megtekintéséből áll. Megnézik vér hemoglobin (vérfesték) koncentrációját is (első véradóknál az előzetes vércsoport-meghatározás megtörténik). Ha a vizsgálat során eltérést találnak, akkor időlegesen vagy véglegesen kizárják a donort a véradásból." textAlignment="JUSTIFY" wrapText="true">
+                  <Label layoutX="324.0" layoutY="40.0" prefHeight="434.0" prefWidth="550.0" text="Véradásra jelentkezhet minden 18 és 65 év közötti egészséges felnőtt ember, a férfiak pedig akár 5-ször, nők maximum 3-szor adhatnak vért egy évben. Két teljes véradás között legkevesebb 56 napnak kell eltelnie. Minden véradást orvosi vizsgálat előz meg, a véradásra való alkalmasságot jelenleg Magyarországon mindig orvos dönti el, a leendő véradó részletes kikérdezése - korábbi és jelenlegi betegségeiről, egészségi állapotáról -, és fizikális vizsgálata után. Az orvosi vizsgálat vérnyomásmérésből, a szív és a tüdő meghallgatásából, a nyaki nyirokcsomók tapintásából, a látható nyálkahártyák megtekintéséből áll. Megnézik vér hemoglobin (vérfesték) koncentrációját is (első véradóknál az előzetes vércsoport-meghatározás megtörténik). Ha a vizsgálat során eltérést találnak, akkor időlegesen vagy véglegesen kizárják a donort a véradásból." textAlignment="JUSTIFY" wrapText="true">
                      <font>
-                        <Font name="Arial Black" size="16.0" />
+                        <Font name="Calibri" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="230.0" layoutY="108.0" text="A legalapvetőbb tudnivalók" textAlignment="CENTER" underline="true">
+                  <Label layoutX="230.0" layoutY="42.0" text="A legalapvetőbb tudnivalók" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Black" size="30.0" />
                      </font>
                   </Label>
+                  <Label layoutX="81.0" layoutY="125.0" text="Véradás előnyei">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="180.0" text="1. Csökken a szívroham kockázata">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="210.0" text="2. Csökken a rák kockázata">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="240.0" text="3. Ingyenes egészségügyi ellenőrzés">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="270.0" text="4. Kalóriaégetés">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="52.0" layoutY="300.0" text="5. Boldogság-tudat">
+                     <font>
+                        <Font name="Calibri" size="14.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="200.0" fitWidth="170.0" layoutX="58.0" layoutY="325.0">
+                     <image>
+                        <Image url="@20110104_veradas.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="795.0" layoutY="445.0">
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
         </content>
@@ -92,17 +134,22 @@
                   <TextField fx:id="VeradoVercsoportFieldUpdate1" layoutX="689.0" layoutY="277.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Vércsoport" />
                   <TextField fx:id="VeradoMennyisegFieldUpdate1" layoutX="689.0" layoutY="315.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Mennyiség" />
                   <TextField fx:id="korhazHozzaFieldUpdate1" layoutX="689.0" layoutY="354.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Melyik_korhaz" />
-                  <Button fx:id="updateButton1" layoutX="740.0" layoutY="430.0" mnemonicParsing="false" onAction="#VeradoUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Update">
+                  <Button fx:id="updateButton1" layoutX="740.0" layoutY="400.0" mnemonicParsing="false" onAction="#VeradoUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Update">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
+                  <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="795.0" layoutY="445.0">
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </content>
       </Tab>
       <Tab text="Véradó pont">
          <content>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="AnchorPane">
+            <AnchorPane prefHeight="626.0" prefWidth="923.0" styleClass="AnchorPane">
                <children>
                   <TableView fx:id="VeradoPontTabla" layoutX="211.0" layoutY="67.0" prefHeight="419.0" prefWidth="423.0" styleClass="tableview">
                      <columns>
@@ -145,6 +192,11 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
+                  <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="795.0" layoutY="445.0">
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
          </content>
