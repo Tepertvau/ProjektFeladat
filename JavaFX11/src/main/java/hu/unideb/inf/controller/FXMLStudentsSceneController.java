@@ -153,80 +153,80 @@ public class FXMLStudentsSceneController implements Initializable {
             int nytvigmin = 59;
             int nyitvatartolora = 0;
             int nytvtolmin = 0;
-    if(VeradoPontKeresoField.getText().equals("") && VeradoPontNyitvatartasMinField.getText().equals("") && VeradoPontNyitvatartasMaxField.getText().equals("")) {
-        while (i < korhazLista.size()) {
-            VeradoPontTabla.refresh();
-
-            Korhaz korhazseged = korhazLista.get(i);
-
-            korhazObservableList.add(korhazseged);
-            i++;
-        }
-        VeradoPontTabla.setItems(korhazObservableList);
-    }
-    else{
-        if(!VeradoPontNyitvatartasMinField.getText().equals("")){
-            if(CheckTimeConditionFormatum(VeradoPontNyitvatartasMinField.getText())){
-                String[] split = VeradoPontNyitvatartasMinField.getText().split(":");
-                nyitvatartolora = Integer.parseInt(split[0]);
-                nytvtolmin = Integer.parseInt(split[1]);
-            }
-
-        }
-        if(!VeradoPontNyitvatartasMaxField.getText().equals("")){
-            if(CheckTimeConditionFormatum(VeradoPontNyitvatartasMaxField.getText())){
-                String[] split = VeradoPontNyitvatartasMaxField.getText().split(":");
-                nyitvatartasigora = Integer.parseInt(split[0]);
-                nytvigmin = Integer.parseInt(split[1]);
-            }
-
-        }
-        if(!VeradoPontKeresoField.getText().equals("")){
-            for (int j = 0; j < korhazLista.size(); j++){
-            if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getNev()) &&
-                    IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
-
-                VeradoPontTabla.refresh();
-
-                Korhaz korhazseged = korhazLista.get(j);
-
-                korhazObservableList.add(korhazseged);
-
-            }
-                if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getHelyszin()) &&
-                        IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
-
+            if(VeradoPontKeresoField.getText().equals("") && VeradoPontNyitvatartasMinField.getText().equals("") && VeradoPontNyitvatartasMaxField.getText().equals("")) {
+                while (i < korhazLista.size()) {
                     VeradoPontTabla.refresh();
 
-                    Korhaz korhazseged = korhazLista.get(j);
+                    Korhaz korhazseged = korhazLista.get(i);
 
                     korhazObservableList.add(korhazseged);
+                    i++;
                 }
-                else if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getId()) &&
-                        IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
-
-                    VeradoPontTabla.refresh();
-
-                    Korhaz korhazseged = korhazLista.get(j);
-
-                    korhazObservableList.add(korhazseged);
-                }
+                VeradoPontTabla.setItems(korhazObservableList);
             }
-        }
-        else if(!VeradoPontNyitvatartasMinField.getText().equals("") || !VeradoPontNyitvatartasMaxField.getText().equals("")){
-            for (int l = 0; l < korhazLista.size(); l++){
-                if(IdoConditiontol(korhazLista.get(l).getIdo(), nyitvatartolora, nytvtolmin, nyitvatartasigora,nytvigmin)){
+            else{
+                if(!VeradoPontNyitvatartasMinField.getText().equals("")){
+                    if(CheckTimeConditionFormatum(VeradoPontNyitvatartasMinField.getText())){
+                        String[] split = VeradoPontNyitvatartasMinField.getText().split(":");
+                        nyitvatartolora = Integer.parseInt(split[0]);
+                        nytvtolmin = Integer.parseInt(split[1]);
+                    }
 
-                    VeradoPontTabla.refresh();
-
-                    Korhaz korhazseged = korhazLista.get(l);
-
-                    korhazObservableList.add(korhazseged);
                 }
-            }
-        }
+                if(!VeradoPontNyitvatartasMaxField.getText().equals("")){
+                    if(CheckTimeConditionFormatum(VeradoPontNyitvatartasMaxField.getText())){
+                        String[] split = VeradoPontNyitvatartasMaxField.getText().split(":");
+                        nyitvatartasigora = Integer.parseInt(split[0]);
+                        nytvigmin = Integer.parseInt(split[1]);
+                    }
 
-    }
+                }
+                if(!VeradoPontKeresoField.getText().equals("")){
+                    for (int j = 0; j < korhazLista.size(); j++){
+                        if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getNev()) &&
+                                IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
+
+                            VeradoPontTabla.refresh();
+
+                            Korhaz korhazseged = korhazLista.get(j);
+
+                            korhazObservableList.add(korhazseged);
+
+                        }
+                        if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getHelyszin()) &&
+                                IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
+
+                            VeradoPontTabla.refresh();
+
+                            Korhaz korhazseged = korhazLista.get(j);
+
+                            korhazObservableList.add(korhazseged);
+                        }
+                        else if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getId()) &&
+                                IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
+
+                            VeradoPontTabla.refresh();
+
+                            Korhaz korhazseged = korhazLista.get(j);
+
+                            korhazObservableList.add(korhazseged);
+                        }
+                    }
+                }
+                else if(!VeradoPontNyitvatartasMinField.getText().equals("") || !VeradoPontNyitvatartasMaxField.getText().equals("")){
+                    for (int l = 0; l < korhazLista.size(); l++){
+                        if(IdoConditiontol(korhazLista.get(l).getIdo(), nyitvatartolora, nytvtolmin, nyitvatartasigora,nytvigmin)){
+
+                            VeradoPontTabla.refresh();
+
+                            Korhaz korhazseged = korhazLista.get(l);
+
+                            korhazObservableList.add(korhazseged);
+                        }
+                    }
+                }
+
+            }
 
 
         }catch (Exception e){
@@ -344,14 +344,14 @@ public class FXMLStudentsSceneController implements Initializable {
                         Verado veradoseged = veradoLista.get(j);
 
                         veradoObservableList.add(veradoseged);
-                    talalat = true;
+                        talalat = true;
                     }
                 }
                 if(talalat == false) {
                     int korhazdid = 0;
                     for (int k = 0; k < korhazLista.size(); k++) {
                         if (VeradoKeresoField.getText().equals(korhazLista.get(k).getNev())) {
-                           korhazdid =korhazLista.get(k).getId();
+                            korhazdid =korhazLista.get(k).getId();
                             break;
                         }
                     }
@@ -365,7 +365,7 @@ public class FXMLStudentsSceneController implements Initializable {
                         }
                     }
                 }
-                        }
+            }
 
 
 
@@ -399,14 +399,14 @@ public class FXMLStudentsSceneController implements Initializable {
             if (veradoLista.get(i).getVercsoport().equals("0+")) OP += veradoLista.get(i).getMennyiseg();
             if (veradoLista.get(i).getVercsoport().equals("0-")) OM += veradoLista.get(i).getMennyiseg();
         }
-            APlusCounter.setText(String.valueOf(AP));
-            AMCounter.setText(String.valueOf(AM));
-            BPCounter.setText(String.valueOf(BP));
-            BMCounter.setText(String.valueOf(BM));
-            ABPCounter.setText(String.valueOf(ABP));
-            ABMCounter.setText(String.valueOf(ABM));
-            OPCounter.setText(String.valueOf(OP));
-            OMCounter.setText(String.valueOf(OM));
+        APlusCounter.setText(String.valueOf(AP));
+        AMCounter.setText(String.valueOf(AM));
+        BPCounter.setText(String.valueOf(BP));
+        BMCounter.setText(String.valueOf(BM));
+        ABPCounter.setText(String.valueOf(ABP));
+        ABMCounter.setText(String.valueOf(ABM));
+        OPCounter.setText(String.valueOf(OP));
+        OMCounter.setText(String.valueOf(OM));
 
     }
 
@@ -418,10 +418,10 @@ public class FXMLStudentsSceneController implements Initializable {
                 String[] split=s.split("-");
                 String[] hourminute = null;
                 for (int i = 0; i < split.length; i++){
-                  hourminute = (split[i].split(":"));
-                  for (int k = 0; k < hourminute.length; k++) {
-                      timelist.add(hourminute[k]);
-                  }
+                    hourminute = (split[i].split(":"));
+                    for (int k = 0; k < hourminute.length; k++) {
+                        timelist.add(hourminute[k]);
+                    }
                 }
 
 
@@ -543,13 +543,13 @@ public class FXMLStudentsSceneController implements Initializable {
     //BUTTON INICIALIZALAS
 
 
-   //VERADO TABLA
-
-   @FXML
-   private TableView<Verado> VeradoTabla;
+    //VERADO TABLA
 
     @FXML
-   private TableColumn<Verado, Integer> AzonositoOszlop;
+    private TableView<Verado> VeradoTabla;
+
+    @FXML
+    private TableColumn<Verado, Integer> AzonositoOszlop;
 
     @FXML
     private TableColumn<Verado, Integer> KorhazIDOszlop;
@@ -625,7 +625,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
                 if(korhazHozzaField.getText().equals(korhazLista.get(b).getNev()))
                 {
-                   korhazletezik = true;
+                    korhazletezik = true;
 
                 }
 
@@ -677,7 +677,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
         VUpdateTableView();
 
-        }
+    }
 
 
     @FXML
@@ -808,7 +808,7 @@ public class FXMLStudentsSceneController implements Initializable {
     //VER MENNYISEG VEGE
 
 
-//VERADO TEXTFIELD
+    //VERADO TEXTFIELD
     @FXML
     private TextField VeradoNevField;
     @FXML
@@ -935,7 +935,7 @@ public class FXMLStudentsSceneController implements Initializable {
         Boolean juttatasformat = false;
         Boolean juttatascheck = false;
         if(VeradoPontNeveField.getText().equals("")||
-            VeradoPontJuttatasField.getText().equals("")||
+                VeradoPontJuttatasField.getText().equals("")||
                 VeradoPontNyitvatartasField.getText().equals("")||
                 VeradoPontHelyField.getText().equals("")
         ){
@@ -945,7 +945,7 @@ public class FXMLStudentsSceneController implements Initializable {
         }
         else{
 
-          nyitv = CheckTimeFormatum(VeradoPontNyitvatartasField.getText());
+            nyitv = CheckTimeFormatum(VeradoPontNyitvatartasField.getText());
 
         }
         if (!VeradoPontJuttatasField.getText().equals("")) {
@@ -986,7 +986,7 @@ public class FXMLStudentsSceneController implements Initializable {
 
     @FXML
     void VeradoPontKeresButtonPushed(ActionEvent event) {
-    VPUpdateTableView();
+        VPUpdateTableView();
     }
 
     @FXML
@@ -1042,7 +1042,7 @@ public class FXMLStudentsSceneController implements Initializable {
                 }
             }
 
-           nyitv = CheckTimeFormatum(VeradoPontNyitvatartasFieldUpdate1.getText());
+            nyitv = CheckTimeFormatum(VeradoPontNyitvatartasFieldUpdate1.getText());
         }
         if(mezoureskorhaz==false&&nyitv==true && juttatasformat == true) {
 
@@ -1090,6 +1090,6 @@ public class FXMLStudentsSceneController implements Initializable {
         VPUpdateTableView();
 
     }
-    }
+}
 
 
