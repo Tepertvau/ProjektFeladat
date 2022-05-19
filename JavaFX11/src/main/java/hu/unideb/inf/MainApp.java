@@ -9,6 +9,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.h2.tools.Server;
 
@@ -18,6 +19,8 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/FXMLStudentsScene.fxml"));
         Scene scene = new Scene(loader.load());
+        Image image = new Image("C:\\Users\\user\\Desktop\\SFMprojekt\\ProjektFeladat\\JavaFX11\\src\\main\\resources\\fxml\\logo.png");
+        stage.getIcons().add(image);
         stage.setTitle("Véradós Móka");
         stage.setScene(scene);
         stage.show();
