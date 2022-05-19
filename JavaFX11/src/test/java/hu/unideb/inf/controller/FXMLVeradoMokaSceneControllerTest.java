@@ -1,15 +1,12 @@
 package hu.unideb.inf.controller;
 
 import hu.unideb.inf.model.Korhaz;
-import hu.unideb.inf.model.Verado;
 import org.junit.jupiter.api.Test;
-
-import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class FXMLStudentsSceneControllerTest extends FXMLStudentsSceneController {
+class FXMLVeradoMokaSceneControllerTest extends FXMLVeradoMokaSceneController {
 
     @Test
     void checkIfConCharwithValidArgument() {
