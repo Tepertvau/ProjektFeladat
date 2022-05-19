@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 
-class FXMLStudentsSceneControllerTest extends FXMLStudentsSceneController {
+class FXMLStudentsSceneControllerTest extends FXMLVeradoMokaSceneController {
 
     @Test
     void checkIfConCharwithValidArgument() {

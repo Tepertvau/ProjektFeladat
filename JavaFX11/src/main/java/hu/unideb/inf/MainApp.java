@@ -22,18 +22,15 @@ public class MainApp extends Application {
         Image image = new Image("C:\\Users\\user\\Desktop\\SFMprojekt\\ProjektFeladat\\JavaFX11\\src\\main\\resources\\fxml\\logo.png");
         stage.getIcons().add(image);
         stage.setTitle("Véradós Móka");
+
         stage.setScene(scene);
+        stage.setMinWidth(1000);
+        stage.setMinHeight(800);
+
         stage.show();
     }
 
-    /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
         System.out.println("Hello World!");
 

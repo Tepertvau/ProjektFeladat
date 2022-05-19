@@ -202,7 +202,7 @@ public class FXMLVeradoMokaSceneController implements Initializable {
 
                             korhazObservableList.add(korhazseged);
                         }
-                        else if (Integer.parseInt(VeradoPontKeresoField.getText()) == (korhazLista.get(j).getId()) &&
+                        else if ((VeradoPontKeresoField.getText()).equals(Integer.toString(korhazLista.get(j).getId())) &&
                                 IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
 
                             VeradoPontTabla.refresh();
@@ -310,7 +310,7 @@ public class FXMLVeradoMokaSceneController implements Initializable {
                 veradoObservableList.clear();
                 Boolean talalat = false;
                 for (int j = 0; j < veradoLista.size(); j++) {
-                    if (Integer.parseInt(VeradoKeresoField.getText()) == (veradoLista.get(j).getId())) {
+                    if ((VeradoKeresoField.getText()).equals(Integer.toString(veradoLista.get(j).getId()))) {
 
                         VeradoTabla.refresh();
 
@@ -339,7 +339,7 @@ public class FXMLVeradoMokaSceneController implements Initializable {
                         talalat = true;
 
 
-                } else if (Integer.parseInt(VeradoKeresoField.getText()) == (veradoLista.get(j).getMennyiseg())) {
+                } else if ((VeradoKeresoField.getText()).equals(Integer.toString(veradoLista.get(j).getMennyiseg()))) {
 
                     VeradoTabla.refresh();
 
