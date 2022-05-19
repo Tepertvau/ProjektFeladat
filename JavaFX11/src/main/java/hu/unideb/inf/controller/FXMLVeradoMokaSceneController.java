@@ -28,7 +28,7 @@ import javax.persistence.Persistence;
 
 
 
-public class FXMLStudentsSceneController implements Initializable {
+public class FXMLVeradoMokaSceneController implements Initializable {
     VeradoDAO aDAO = new JpaVeradoDAO();
 
 

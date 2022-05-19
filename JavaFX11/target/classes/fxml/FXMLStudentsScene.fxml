@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.FXMLStudentsSceneController">
+<TabPane prefHeight="608.0" prefWidth="907.0" stylesheets="@styles.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.FXMLVeradoMokaSceneController">
    <tabs>
       <Tab text="Főoldal">
         <content>
@@ -138,8 +138,8 @@
                         <TableColumn fx:id="AzonositoOszlop" prefWidth="62.0" text="Azonosító" />
                         <TableColumn fx:id="NevOszlop" prefWidth="97.0" text="Mennyiség (ml)" />
                         <TableColumn fx:id="VercsoportOszlop" prefWidth="130.0" text="Név" />
-                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="108.0" text="Véradó pont ID" />
-                        <TableColumn fx:id="MennyisegOszlop" prefWidth="62.0" text="Vércsoport" />
+                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="97.0" text="Véradó pont ID" />
+                        <TableColumn fx:id="MennyisegOszlop" prefWidth="73.0" text="Vércsoport" />
                      </columns>
                   </TableView>
                   <Button layoutX="412.0" layoutY="485.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl">
@@ -152,7 +152,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
                   <TextField fx:id="VeradoVercsoportField" layoutX="689.0" layoutY="94.0" prefHeight="26.0" prefWidth="185.0" promptText="Vércsoport" />
-                  <TextField fx:id="VeradoMennyisegField" layoutX="689.0" layoutY="130.0" prefHeight="26.0" prefWidth="185.0" promptText="Mennyiség (ml)" />
+                  <TextField fx:id="VeradoMennyisegField" layoutX="689.0" layoutY="130.0" prefHeight="26.0" prefWidth="185.0" promptText="Mennyiség (450-500ml)" />
                   <TextField fx:id="VeradoNevField" layoutX="689.0" layoutY="62.0" prefHeight="26.0" prefWidth="185.0" promptText="Név" />
                   <Button fx:id="myButton" layoutX="740.0" layoutY="204.0" mnemonicParsing="false" onAction="#VeradoHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad">
                      <cursor>
@@ -186,7 +186,7 @@
                   <TextField fx:id="korhazHozzaField" layoutX="690.0" layoutY="162.0" prefHeight="26.0" prefWidth="185.0" promptText="Véradó pont" />
                   <TextField fx:id="VeradoNevFieldUpdate1" layoutX="690.0" layoutY="254.0" prefHeight="26.0" prefWidth="185.0" promptText="Új név" />
                   <TextField fx:id="VeradoVercsoportFieldUpdate1" layoutX="690.0" layoutY="290.0" prefHeight="26.0" prefWidth="185.0" promptText="Új vércsoport" />
-                  <TextField fx:id="VeradoMennyisegFieldUpdate1" layoutX="689.0" layoutY="328.0" prefHeight="26.0" prefWidth="185.0" promptText="Új mennyiség (ml)" />
+                  <TextField fx:id="VeradoMennyisegFieldUpdate1" layoutX="689.0" layoutY="328.0" prefHeight="26.0" prefWidth="185.0" promptText="Új mennyiség (450-500ml)" />
                   <TextField fx:id="korhazHozzaFieldUpdate1" layoutX="690.0" layoutY="364.0" prefHeight="26.0" prefWidth="185.0" promptText="Új véradó pont" />
                   <Button fx:id="updateButton1" layoutX="740.0" layoutY="402.0" mnemonicParsing="false" onAction="#VeradoUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Módosít">
                      <cursor>
