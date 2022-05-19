@@ -202,7 +202,7 @@ public class FXMLVeradoMokaSceneController implements Initializable {
 
                             korhazObservableList.add(korhazseged);
                         }
-                        else if (VeradoPontKeresoField.getText().equals(korhazLista.get(j).getId()) &&
+                        else if (Integer.parseInt(VeradoPontKeresoField.getText()) == (korhazLista.get(j).getId()) &&
                                 IdoConditiontol(korhazLista.get(j).getIdo(),nyitvatartolora,nytvtolmin,nyitvatartasigora,nytvigmin)) {
 
                             VeradoPontTabla.refresh();
@@ -306,12 +306,11 @@ public class FXMLVeradoMokaSceneController implements Initializable {
                     i++;
                 }
             }
-            else
-            {
+            else {
                 veradoObservableList.clear();
                 Boolean talalat = false;
                 for (int j = 0; j < veradoLista.size(); j++) {
-                    if (VeradoKeresoField.getText().equals(veradoLista.get(j).getId())) {
+                    if (Integer.parseInt(VeradoKeresoField.getText()) == (veradoLista.get(j).getId())) {
 
                         VeradoTabla.refresh();
 
@@ -329,14 +328,7 @@ public class FXMLVeradoMokaSceneController implements Initializable {
 
                         veradoObservableList.add(veradoseged);
                         talalat = true;
-                    } else if (VeradoKeresoField.getText().equals(veradoLista.get(j).getMennyiseg())) {
 
-                        VeradoTabla.refresh();
-
-                        Verado veradoseged = veradoLista.get(j);
-
-                        veradoObservableList.add(veradoseged);
-                        talalat = true;
                     } else if (VeradoKeresoField.getText().equals(veradoLista.get(j).getVercsoport())) {
 
                         VeradoTabla.refresh();
@@ -345,8 +337,18 @@ public class FXMLVeradoMokaSceneController implements Initializable {
 
                         veradoObservableList.add(veradoseged);
                         talalat = true;
-                    }
+
+
+                } else if (Integer.parseInt(VeradoKeresoField.getText()) == (veradoLista.get(j).getMennyiseg())) {
+
+                    VeradoTabla.refresh();
+
+                    Verado veradoseged = veradoLista.get(j);
+
+                    veradoObservableList.add(veradoseged);
+                    talalat = true;
                 }
+            }
                 if(talalat == false) {
                     int korhazdid = 0;
                     for (int k = 0; k < korhazLista.size(); k++) {
