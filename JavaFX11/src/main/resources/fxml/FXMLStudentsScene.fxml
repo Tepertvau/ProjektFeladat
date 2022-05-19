@@ -82,10 +82,10 @@
                   <TableView fx:id="VeradoPontTabla" layoutX="164.0" layoutY="69.0" prefHeight="388.0" prefWidth="502.0" styleClass="tableview">
                      <columns>
                         <TableColumn fx:id="VeradoPontAzonositoOszlop" prefWidth="74.0" text="Azonosító" />
-                        <TableColumn fx:id="VeradoPontNeveOszlop" prefWidth="124.0" text="Helyszín" />
-                        <TableColumn fx:id="VeradoPontNyitvatartasOszlop" prefWidth="110.0" text="Nyitvatartás" />
-                        <TableColumn fx:id="VeradoPontJuttatasOszlop" prefWidth="66.0" text="Juttatás" />
-                        <TableColumn fx:id="VeradoPontHelyeOszlop" prefWidth="127.0" text="Kórház neve" />
+                        <TableColumn fx:id="VeradoPontNeveOszlop" prefWidth="130.0" text="Helyszín" />
+                        <TableColumn fx:id="VeradoPontNyitvatartasOszlop" prefWidth="88.0" text="Nyitvatartás" />
+                        <TableColumn fx:id="VeradoPontJuttatasOszlop" prefWidth="55.0" text="Juttatás" />
+                        <TableColumn fx:id="VeradoPontHelyeOszlop" prefWidth="154.0" text="Véradó pont neve" />
                      </columns>
                   </TableView>
                   <TextField fx:id="VeradoPontKeresoField" layoutX="26.0" layoutY="79.0" prefHeight="26.0" prefWidth="132.0" promptText="Kereső" />
@@ -93,11 +93,11 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <TextField fx:id="VeradoPontNeveField" layoutX="680.0" layoutY="79.0" prefHeight="26.0" prefWidth="133.0" promptText="Kórház név" />
-                  <TextField fx:id="VeradoPontJuttatasField" layoutX="680.0" layoutY="118.0" prefHeight="26.0" prefWidth="132.0" promptText="Juttatás" />
-                  <TextField fx:id="VeradoPontNyitvatartasField" layoutX="681.0" layoutY="153.0" prefHeight="26.0" prefWidth="132.0" promptText="Nyitvatartás" />
-                  <TextField fx:id="VeradoPontHelyField" layoutX="681.0" layoutY="188.0" prefHeight="26.0" prefWidth="132.0" promptText="Hely" />
-                  <Button fx:id="VeradoPontHButton" layoutX="705.0" layoutY="223.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad">
+                  <TextField fx:id="VeradoPontNeveField" layoutX="680.0" layoutY="79.0" prefHeight="28.0" prefWidth="169.0" promptText="Véradó pont név" />
+                  <TextField fx:id="VeradoPontJuttatasField" layoutX="680.0" layoutY="118.0" prefHeight="27.0" prefWidth="170.0" promptText="Juttatás(VAN/NINCS)" />
+                  <TextField fx:id="VeradoPontNyitvatartasField" layoutX="681.0" layoutY="153.0" prefHeight="28.0" prefWidth="170.0" promptText="Nyitvatartás(óó:pp-óó:pp)" />
+                  <TextField fx:id="VeradoPontHelyField" layoutX="681.0" layoutY="188.0" prefHeight="27.0" prefWidth="170.0" promptText="Helyszín" />
+                  <Button fx:id="VeradoPontHButton" layoutX="723.0" layoutY="223.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
@@ -112,11 +112,11 @@
                         <TextField fx:id="VeradoPontNyitvatartasMaxField" layoutX="69.0" layoutY="35.0" prefHeight="25.0" prefWidth="60.0" promptText="-ig" />
                      </children>
                   </Pane>
-                  <TextField fx:id="VeradoPontNeveFieldUpdate1" layoutX="680.0" layoutY="268.0" prefHeight="26.0" prefWidth="133.0" promptText="Új_Kórház név" />
-                  <TextField fx:id="VeradoPontJuttatasFieldUpdate1" layoutX="680.0" layoutY="314.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Juttatás" />
-                  <TextField fx:id="VeradoPontNyitvatartasFieldUpdate1" layoutX="680.0" layoutY="359.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Nyitvatartás" />
-                  <TextField fx:id="VeradoPontHelyFieldupdate1" layoutX="680.0" layoutY="410.0" prefHeight="26.0" prefWidth="132.0" promptText="Új_Hely" />
-                  <Button fx:id="VeradoPontHButtonUpdate1" layoutX="705.0" layoutY="459.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Update">
+                  <TextField fx:id="VeradoPontNeveFieldUpdate1" layoutX="680.0" layoutY="268.0" prefHeight="27.0" prefWidth="169.0" promptText="Új Véradó pont név" />
+                  <TextField fx:id="VeradoPontJuttatasFieldUpdate1" layoutX="680.0" layoutY="304.0" prefHeight="27.0" prefWidth="170.0" promptText="Új Juttatás(VAN/NINCS)" />
+                  <TextField fx:id="VeradoPontNyitvatartasFieldUpdate1" layoutX="681.0" layoutY="341.0" prefHeight="27.0" prefWidth="171.0" promptText="Új Nyitvatartás(óó:pp-óó:pp)" />
+                  <TextField fx:id="VeradoPontHelyFieldupdate1" layoutX="679.0" layoutY="379.0" prefHeight="26.0" prefWidth="171.0" promptText="Új Helyszín" />
+                  <Button fx:id="VeradoPontHButtonUpdate1" layoutX="725.0" layoutY="419.0" mnemonicParsing="false" onAction="#VeradoPontHozzaadUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Módosít">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
@@ -135,11 +135,11 @@
                <children>
                   <TableView fx:id="VeradoTabla" layoutX="224.0" layoutY="36.0" prefHeight="435.0" prefWidth="460.0" styleClass="tableview">
                      <columns>
-                        <TableColumn fx:id="AzonositoOszlop" prefWidth="67.199951171875" text="Azonosító" />
-                        <TableColumn fx:id="NevOszlop" prefWidth="106.0" text="Mennyiség" />
-                        <TableColumn fx:id="VercsoportOszlop" prefWidth="137.0" text="Név" />
-                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="72.0" text="KórházID" />
-                        <TableColumn fx:id="MennyisegOszlop" prefWidth="76.0" text="Vércsoport" />
+                        <TableColumn fx:id="AzonositoOszlop" prefWidth="62.0" text="Azonosító" />
+                        <TableColumn fx:id="NevOszlop" prefWidth="97.0" text="Mennyiség (ml)" />
+                        <TableColumn fx:id="VercsoportOszlop" prefWidth="130.0" text="Név" />
+                        <TableColumn fx:id="KorhazIDOszlop" prefWidth="97.0" text="Véradó pont ID" />
+                        <TableColumn fx:id="MennyisegOszlop" prefWidth="73.0" text="Vércsoport" />
                      </columns>
                   </TableView>
                   <Button layoutX="412.0" layoutY="485.0" mnemonicParsing="false" onAction="#VeradoTorolButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Töröl">
@@ -151,10 +151,10 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <TextField fx:id="VeradoVercsoportField" layoutX="690.0" layoutY="75.0" prefHeight="26.0" prefWidth="185.0" promptText="Vércsoport" />
-                  <TextField fx:id="VeradoMennyisegField" layoutX="689.0" layoutY="111.0" prefHeight="26.0" prefWidth="185.0" promptText="Mennyiség" />
-                  <TextField fx:id="VeradoNevField" layoutX="689.0" layoutY="36.0" prefHeight="26.0" prefWidth="185.0" promptText="Név" />
-                  <Button fx:id="myButton" layoutX="740.0" layoutY="180.0" mnemonicParsing="false" onAction="#VeradoHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad">
+                  <TextField fx:id="VeradoVercsoportField" layoutX="689.0" layoutY="94.0" prefHeight="26.0" prefWidth="185.0" promptText="Vércsoport" />
+                  <TextField fx:id="VeradoMennyisegField" layoutX="689.0" layoutY="130.0" prefHeight="26.0" prefWidth="185.0" promptText="Mennyiség (450-500ml)" />
+                  <TextField fx:id="VeradoNevField" layoutX="689.0" layoutY="62.0" prefHeight="26.0" prefWidth="185.0" promptText="Név" />
+                  <Button fx:id="myButton" layoutX="740.0" layoutY="204.0" mnemonicParsing="false" onAction="#VeradoHozzaadButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Hozzáad">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
@@ -183,12 +183,12 @@
                         <Text fx:id="OMCounter" fill="WHITE" layoutX="40.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" />
                      </children>
                   </Pane>
-                  <TextField fx:id="korhazHozzaField" layoutX="689.0" layoutY="142.0" prefHeight="26.0" prefWidth="185.0" promptText="Melyik_korhaz" />
-                  <TextField fx:id="VeradoNevFieldUpdate1" layoutX="690.0" layoutY="254.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_név" />
-                  <TextField fx:id="VeradoVercsoportFieldUpdate1" layoutX="690.0" layoutY="290.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Vércsoport" />
-                  <TextField fx:id="VeradoMennyisegFieldUpdate1" layoutX="689.0" layoutY="328.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Mennyiség" />
-                  <TextField fx:id="korhazHozzaFieldUpdate1" layoutX="690.0" layoutY="364.0" prefHeight="26.0" prefWidth="185.0" promptText="Új_Melyik_korhaz" />
-                  <Button fx:id="updateButton1" layoutX="740.0" layoutY="402.0" mnemonicParsing="false" onAction="#VeradoUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Update">
+                  <TextField fx:id="korhazHozzaField" layoutX="690.0" layoutY="162.0" prefHeight="26.0" prefWidth="185.0" promptText="Véradó pont" />
+                  <TextField fx:id="VeradoNevFieldUpdate1" layoutX="690.0" layoutY="254.0" prefHeight="26.0" prefWidth="185.0" promptText="Új név" />
+                  <TextField fx:id="VeradoVercsoportFieldUpdate1" layoutX="690.0" layoutY="290.0" prefHeight="26.0" prefWidth="185.0" promptText="Új vércsoport" />
+                  <TextField fx:id="VeradoMennyisegFieldUpdate1" layoutX="689.0" layoutY="328.0" prefHeight="26.0" prefWidth="185.0" promptText="Új mennyiség (450-500ml)" />
+                  <TextField fx:id="korhazHozzaFieldUpdate1" layoutX="690.0" layoutY="364.0" prefHeight="26.0" prefWidth="185.0" promptText="Új véradó pont" />
+                  <Button fx:id="updateButton1" layoutX="740.0" layoutY="402.0" mnemonicParsing="false" onAction="#VeradoUpdateButtonPushed" prefHeight="26.0" prefWidth="83.0" text="Módosít">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
